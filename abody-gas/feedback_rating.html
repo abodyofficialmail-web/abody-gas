@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <base target="_top">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>トレーニング評価</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: linear-gradient(135deg, #DC143C 0%, #8B0000 100%);
+      color: #fff;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    .container {
+      max-width: 600px;
+      width: 100%;
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 20px;
+      padding: 40px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+      color: #333;
+    }
+    .header {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+    .header h1 {
+      font-size: 28px;
+      color: #DC143C;
+      margin-bottom: 10px;
+    }
+    .header p {
+      font-size: 16px;
+      color: #666;
+    }
+    .rating-section {
+      margin-bottom: 30px;
+    }
+    .rating-label {
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 20px;
+      color: #333;
+      text-align: center;
+    }
+    .stars {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 30px;
+    }
+    .star {
+      font-size: 48px;
+      cursor: pointer;
+      transition: all 0.2s;
+      color: #ddd;
+    }
+    .star:hover {
+      transform: scale(1.2);
+    }
+    .star.active {
+      color: #FFD700;
+    }
+    .star.selected {
+      color: #FFD700;
+    }
+    .comment-section {
+      margin-bottom: 30px;
+    }
+    .comment-label {
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 12px;
+      color: #333;
+    }
+    .comment-textarea {
+      width: 100%;
+      min-height: 120px;
+      padding: 16px;
+      border: 2px solid #ddd;
+      border-radius: 12px;
+      font-size: 16px;
+      font-family: inherit;
+      resize: vertical;
+      transition: border-color 0.3s;
+    }
+    .comment-textarea:focus {
+      outline: none;
+      border-color: #DC143C;
+    }
+    .submit-btn {
+      width: 100%;
+      padding: 16px;
+      background: linear-gradient(135deg, #DC143C 0%, #B22222 100%);
+      border: none;
+      border-radius: 12px;
+      color: white;
+      font-size: 18px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.3s;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    .submit-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 24px rgba(220, 20, 60, 0.4);
+    }
+    .submit-btn:disabled {
+      background: #ccc;
+      cursor: not-allowed;
+      transform: none;
+    }
+    .success-message {
+      text-align: center;
+      padding: 40px 20px;
+    }
+    .success-message h2 {
+      font-size: 24px;
+      color: #34C759;
+      margin-bottom: 16px;
+    }
+    .success-message p {
+      font-size: 16px;
+      color: #666;
+      line-height: 1.6;
+    }
+    .error-message {
+      background: #FF3B30;
+      color: white;
+      padding: 16px;
+      border-radius: 12px;
+      margin-bottom: 20px;
+      text-align: center;
+      font-size: 14px;
+    }
+    .rating-description {
+      text-align: center;
+      font-size: 14px;
+      color: #999;
+      margin-top: 8px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div id="rating-form">
+      <div class="header">
+        <h1>🌟 トレーニング評価</h1>
+        <p>本日のトレーニングはいかがでしたか？</p>
+      </div>
+      
+      <div id="error-message" class="error-message" style="display: none;"></div>
+      
+      <div class="rating-section">
+        <div class="rating-label">総合評価</div>
+        <div class="stars" id="stars">
+          <span class="star" data-rating="1">⭐</span>
+          <span class="star" data-rating="2">⭐</span>
+          <span class="star" data-rating="3">⭐</span>
+          <span class="star" data-rating="4">⭐</span>
+          <span class="star" data-rating="5">⭐</span>
+        </div>
+        <div class="rating-description" id="rating-desc">評価を選択してください</div>
+      </div>
+      
+      <div class="comment-section">
+        <div class="comment-label">ご意見・ご感想（任意）</div>
+        <textarea 
+          id="comment" 
+          class="comment-textarea" 
+          placeholder="トレーニングの感想やご意見をお聞かせください。例：メニューが良かった、もっとこうしたい、など"
+        ></textarea>
+      </div>
+      
+      <button id="submit-btn" class="submit-btn" onclick="submitRating()">
+        評価を送信
+      </button>
+    </div>
+    
+    <div id="success-message" class="success-message" style="display: none;">
+      <h2>✅ ありがとうございました！</h2>
+      <p>評価を送信いただき、ありがとうございます。<br>今後のトレーニング改善に活用させていただきます。</p>
+    </div>
+  </div>
+
+  <script>
+    let selectedRating = 0;
+    const ratingDescriptions = {
+      0: "評価を選択してください",
+      1: "😞 改善が必要",
+      2: "😐 やや不満",
+      3: "🙂 普通",
+      4: "😊 満足",
+      5: "😍 とても満足"
+    };
+    
+    // URLパラメータからセッションIDを取得
+    const urlParams = new URLSearchParams(window.location.search);
+    const sessionId = urlParams.get('id');
+    const memberId = urlParams.get('member');
+    
+    // 既に評価済みかチェック（サーバー側から渡された値）
+    const isAlreadyRated = <?= isAlreadyRated ? 'true' : 'false' ?>;
+    
+    if (isAlreadyRated) {
+      document.getElementById('rating-form').style.display = 'none';
+      document.getElementById('success-message').innerHTML = `
+        <h2>✅ 既に評価済みです</h2>
+        <p>このセッションは既に評価をいただいています。<br>ご協力ありがとうございました！</p>
+      `;
+      document.getElementById('success-message').style.display = 'block';
+    } else if (!sessionId) {
+      document.getElementById('error-message').textContent = 'エラー: セッションIDが見つかりません';
+      document.getElementById('error-message').style.display = 'block';
+      document.getElementById('submit-btn').disabled = true;
+    }
+    
+    // 星のクリック処理
+    const stars = document.querySelectorAll('.star');
+    const ratingDesc = document.getElementById('rating-desc');
+    
+    stars.forEach((star, index) => {
+      star.addEventListener('mouseenter', function() {
+        const rating = parseInt(this.dataset.rating);
+        highlightStars(rating);
+      });
+      
+      star.addEventListener('click', function() {
+        selectedRating = parseInt(this.dataset.rating);
+        highlightStars(selectedRating);
+        ratingDesc.textContent = ratingDescriptions[selectedRating];
+      });
+    });
+    
+    document.getElementById('stars').addEventListener('mouseleave', function() {
+      if (selectedRating > 0) {
+        highlightStars(selectedRating);
+      } else {
+        highlightStars(0);
+      }
+    });
+    
+    function highlightStars(rating) {
+      stars.forEach((star, index) => {
+        if (index < rating) {
+          star.classList.add('active');
+        } else {
+          star.classList.remove('active');
+        }
+      });
+    }
+    
+    function submitRating() {
+      if (selectedRating === 0) {
+        alert('評価を選択してください');
+        return;
+      }
+      
+      if (!sessionId) {
+        alert('エラー: セッションIDが見つかりません');
+        return;
+      }
+      
+      const comment = document.getElementById('comment').value.trim();
+      const submitBtn = document.getElementById('submit-btn');
+      
+      submitBtn.disabled = true;
+      submitBtn.textContent = '送信中...';
+      
+      google.script.run
+        .withSuccessHandler(function(result) {
+          if (result.success) {
+            document.getElementById('rating-form').style.display = 'none';
+            document.getElementById('success-message').style.display = 'block';
+          } else {
+            document.getElementById('error-message').textContent = 'エラー: ' + (result.message || '送信に失敗しました');
+            document.getElementById('error-message').style.display = 'block';
+            submitBtn.disabled = false;
+            submitBtn.textContent = '評価を送信';
+          }
+        })
+        .withFailureHandler(function(error) {
+          console.error('送信エラー:', error);
+          document.getElementById('error-message').textContent = 'エラー: ' + error.message;
+          document.getElementById('error-message').style.display = 'block';
+          submitBtn.disabled = false;
+          submitBtn.textContent = '評価を送信';
+        })
+        .fb_api_submitRating(sessionId, memberId, selectedRating, comment);
+    }
+  </script>
+</body>
+</html>

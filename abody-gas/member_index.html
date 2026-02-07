@@ -1,0 +1,984 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <base target="_top">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Abody マイカルテ</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      padding: 20px;
+    }
+    .container { max-width: 900px; margin: 0 auto; }
+    
+    .header {
+      background: white;
+      padding: 24px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      margin-bottom: 24px;
+      text-align: center;
+    }
+    .header h1 {
+      font-size: 28px;
+      color: #333;
+      margin-bottom: 8px;
+    }
+    .header .member-name {
+      font-size: 20px;
+      color: #667eea;
+      font-weight: 600;
+    }
+    
+    #login-screen {
+      max-width: 500px;
+      margin: 0 auto;
+    }
+    
+    .tabs {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 20px;
+      overflow-x: auto;
+    }
+    .tab {
+      padding: 14px 20px;
+      background: rgba(255,255,255,0.9);
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 15px;
+      font-weight: 600;
+      color: #666;
+      transition: all 0.3s;
+      white-space: nowrap;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    .tab:hover { background: white; transform: translateY(-2px); }
+    .tab.active {
+      background: white;
+      color: #667eea;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
+    
+    .tab-content { display: none; }
+    .tab-content.active { display: block; }
+    
+    .card {
+      background: white;
+      padding: 24px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      margin-bottom: 20px;
+    }
+    .card h2 {
+      font-size: 20px;
+      margin-bottom: 16px;
+      color: #667eea;
+      border-bottom: 3px solid #667eea;
+      padding-bottom: 10px;
+    }
+    .card h3 {
+      font-size: 18px;
+      margin: 20px 0 12px 0;
+      color: #333;
+    }
+    
+    .session-item {
+      padding: 16px;
+      border-left: 4px solid #667eea;
+      background: linear-gradient(135deg, #f8f9ff 0%, #fff 100%);
+      margin-bottom: 16px;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    }
+    .session-item .date { 
+      font-weight: 600; 
+      color: #333;
+      font-size: 16px;
+    }
+    .session-item .trainer { 
+      color: #666; 
+      font-size: 14px;
+      margin-top: 4px;
+    }
+    .session-item .part { 
+      display: inline-block;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 13px;
+      margin-top: 8px;
+      font-weight: 600;
+    }
+    .menu-list { 
+      margin-top: 12px; 
+      padding-left: 20px;
+      background: white;
+      padding: 12px;
+      border-radius: 8px;
+    }
+    .menu-item { 
+      font-size: 14px;
+      color: #555;
+      margin: 6px 0;
+      padding-left: 8px;
+      border-left: 2px solid #667eea;
+    }
+    
+    .ai-text {
+      white-space: pre-wrap;
+      line-height: 1.8;
+      color: #333;
+      background: linear-gradient(135deg, #f8f9ff 0%, #fff 100%);
+      padding: 20px;
+      border-radius: 8px;
+      border-left: 4px solid #667eea;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    }
+    
+    .target-photo {
+      max-width: 100%;
+      max-height: 500px;
+      border-radius: 12px;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+      margin: 16px 0;
+      display: block;
+    }
+    
+    .ai-status {
+      display: inline-block;
+      padding: 6px 16px;
+      border-radius: 20px;
+      font-size: 13px;
+      font-weight: 600;
+      margin-bottom: 16px;
+    }
+    .ai-status.success { background: #34C759; color: white; }
+    .ai-status.error { background: #FF3B30; color: white; }
+    .ai-status.pending { background: #FF9500; color: white; }
+    
+    .metrics-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px;
+      margin: 20px 0;
+    }
+    
+    .metric-box {
+      background: linear-gradient(135deg, #f8f9ff 0%, #fff 100%);
+      padding: 16px;
+      border-radius: 8px;
+      border-left: 4px solid #667eea;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    }
+    
+    .metric-box .label {
+      font-size: 13px;
+      color: #666;
+      margin-bottom: 8px;
+      font-weight: 600;
+    }
+    
+    .metric-box .value {
+      font-size: 24px;
+      color: #667eea;
+      font-weight: 700;
+    }
+    
+    .metric-box .unit {
+      font-size: 14px;
+      color: #999;
+      margin-left: 4px;
+    }
+    
+    .recommendation-item {
+      background: linear-gradient(135deg, #f8f9ff 0%, #fff 100%);
+      padding: 16px;
+      border-radius: 8px;
+      margin-bottom: 12px;
+      border-left: 4px solid #667eea;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    }
+    
+    .recommendation-item .category {
+      display: inline-block;
+      background: #667eea;
+      color: white;
+      padding: 4px 12px;
+      border-radius: 12px;
+      font-size: 12px;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+    
+    .recommendation-item .priority {
+      display: inline-block;
+      padding: 4px 12px;
+      border-radius: 12px;
+      font-size: 12px;
+      font-weight: 600;
+      margin-left: 8px;
+    }
+    
+    .recommendation-item .priority.high {
+      background: #FF3B30;
+      color: white;
+    }
+    
+    .recommendation-item .priority.medium {
+      background: #FF9500;
+      color: white;
+    }
+    
+    .recommendation-item .priority.good {
+      background: #34C759;
+      color: white;
+    }
+    
+    .recommendation-item .message {
+      font-size: 15px;
+      color: #333;
+      margin: 8px 0;
+      font-weight: 500;
+    }
+    
+    .recommendation-item .action {
+      font-size: 14px;
+      color: #666;
+      padding-left: 12px;
+      border-left: 2px solid #667eea;
+      margin-top: 8px;
+    }
+    
+    .progress-bar {
+      background: #e0e0e0;
+      border-radius: 10px;
+      height: 20px;
+      overflow: hidden;
+      margin: 8px 0;
+    }
+    
+    .progress-bar-fill {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      height: 100%;
+      transition: width 0.3s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 12px;
+      font-weight: 600;
+    }
+    
+    .info-box {
+      background: #f8f9fa;
+      padding: 16px;
+      border-radius: 8px;
+      border-left: 4px solid #667eea;
+      margin: 16px 0;
+    }
+    
+    .info-box .title {
+      font-weight: 600;
+      color: #333;
+      margin-bottom: 8px;
+      font-size: 15px;
+    }
+    
+    .info-box .content {
+      font-size: 14px;
+      color: #666;
+      line-height: 1.6;
+    }
+    
+    .empty { 
+      color: #999; 
+      text-align: center; 
+      padding: 60px 20px;
+      font-size: 16px;
+    }
+    
+    .loading {
+      text-align: center;
+      padding: 60px 20px;
+      color: white;
+      font-size: 18px;
+    }
+    
+    input[type="text"],
+    input[type="email"],
+    input[type="number"] {
+      width: 100%;
+      padding: 12px;
+      font-size: 16px;
+      border: 2px solid #ddd;
+      border-radius: 8px;
+      margin-bottom: 8px;
+    }
+    
+    button {
+      width: 100%;
+      padding: 14px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 18px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+    
+    button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+    }
+    
+    button:active {
+      transform: translateY(0);
+    }
+    
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 600;
+      color: #333;
+    }
+    
+    .hint {
+      font-size: 13px;
+      color: #999;
+      margin-top: 4px;
+      margin-bottom: 16px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>💪 Abody マイカルテ</h1>
+      <div class="member-name" id="memberName">ログインしてください</div>
+    </div>
+    
+    <!-- ログイン画面 -->
+    <div id="login-screen">
+      <div class="card">
+        <h2>🔐 ログイン</h2>
+        <div>
+          <label for="memberIdInput">会員ID（オプション）</label>
+          <input type="text" id="memberIdInput" placeholder="例: EBI001">
+          <p class="hint">※メールアドレスだけでもログインできます</p>
+        </div>
+        
+        <div>
+          <label for="emailInput">メールアドレス（必須）</label>
+          <input type="email" id="emailInput" placeholder="例: test@gmail.com">
+          <p class="hint">※Abodyに登録済みのメールアドレスを入力してください</p>
+        </div>
+        
+        <button id="loginBtn" onclick="handleLogin()">ログイン</button>
+      </div>
+    </div>
+    
+    <div id="loading" class="loading" style="display: none;">
+      読み込み中...
+    </div>
+    
+    <div id="content" style="display: none;">
+      <div class="tabs">
+        <button class="tab active" onclick="switchTab(event, 'ai2026')">🎯 目標達成プラン</button>
+        <button class="tab" onclick="switchTab(event, 'ideal')">📊 理想値分析</button>
+        <button class="tab" onclick="switchTab(event, 'weight')">体重推移</button>
+        <button class="tab" onclick="switchTab(event, 'latest')">最新セッション</button>
+        <button class="tab" onclick="switchTab(event, 'posture')">姿勢評価 (AI)</button>
+        <button class="tab" onclick="switchTab(event, 'history')">履歴</button>
+      </div>
+      
+      <!-- 2026年目標AI -->
+      <div id="tab-ai2026" class="tab-content active">
+        <div class="card">
+          <h2>🎯 2026年目標達成ロードマップ</h2>
+          <div id="ai2026-content"></div>
+          <div id="progress-plan-content"></div>
+        </div>
+      </div>
+      
+      <!-- 理想値分析 -->
+      <div id="tab-ideal" class="tab-content">
+        <div class="card">
+          <h2>📊 あなたの理想値分析</h2>
+          <div id="ideal-content"></div>
+        </div>
+      </div>
+      
+      <!-- 体重推移 -->
+      <div id="tab-weight" class="tab-content">
+        <div class="card">
+          <h2>⚖️ 体重推移</h2>
+          
+          <div style="background: linear-gradient(135deg, #f8f9ff 0%, #fff 100%); padding: 20px; border-radius: 8px; margin-bottom: 20px;">
+            <h3 style="margin-bottom: 12px; color: #333;">今日の体重を記録</h3>
+            <div style="display: flex; gap: 12px; align-items: flex-start;">
+              <div style="flex: 1;">
+                <input type="number" id="weightInput" placeholder="体重（kg）" step="0.1" min="0" max="300">
+              </div>
+              <button onclick="saveWeight()" style="width: auto; padding: 12px 24px;">記録</button>
+            </div>
+          </div>
+          
+          <div id="weight-chart"></div>
+          <div id="weight-list"></div>
+        </div>
+      </div>
+      
+      <!-- 最新セッション -->
+      <div id="tab-latest" class="tab-content">
+        <div class="card">
+          <h2>📅 最新セッション</h2>
+          <div id="latest-content"></div>
+        </div>
+      </div>
+      
+      <!-- 姿勢評価 -->
+      <div id="tab-posture" class="tab-content">
+        <div class="card">
+          <h2>🧘 姿勢評価アプローチ (AI)</h2>
+          <div id="posture-content"></div>
+        </div>
+      </div>
+      
+      <!-- 履歴一覧 -->
+      <div id="tab-history" class="tab-content">
+        <div class="card">
+          <h2>📊 トレーニング履歴</h2>
+          <div id="history-content"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let currentTab = 'ai2026';
+    
+    // ログイン処理
+    function handleLogin() {
+      const memberId = document.getElementById('memberIdInput').value.trim();
+      const email = document.getElementById('emailInput').value.trim();
+      
+      if (!email) {
+        alert('メールアドレスを入力してください');
+        return;
+      }
+      
+      document.getElementById('login-screen').style.display = 'none';
+      document.getElementById('loading').style.display = 'block';
+      
+      google.script.run
+        .withSuccessHandler(function(result) {
+          document.getElementById('loading').style.display = 'none';
+          
+          if (!result.ok) {
+            alert(result.message);
+            document.getElementById('login-screen').style.display = 'block';
+            return;
+          }
+          
+          // ログイン成功
+          document.getElementById('content').style.display = 'block';
+          document.getElementById('memberName').textContent = 
+            result.memberInfo?.name || result.memberId;
+          
+          renderLatest(result.latest);
+          renderPosture(result.posture);
+          renderAi2026(result.ai2026, result.idealMetrics, result.progressPlan);
+          renderIdealMetrics(result.idealMetrics, result.ai2026);
+          renderHistory(result.history);
+          renderWeightLog(result.weightLog);
+        })
+        .withFailureHandler(function(error) {
+          document.getElementById('loading').style.display = 'none';
+          document.getElementById('login-screen').style.display = 'block';
+          alert('エラー: ' + error.message);
+        })
+        .mw_api_login(memberId, email);
+    }
+    
+    // Enter キーでログイン
+    document.addEventListener('DOMContentLoaded', function() {
+      document.getElementById('emailInput').addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') {
+          handleLogin();
+        }
+      });
+    });
+    
+    function switchTab(event, tabName) {
+      document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+      event.target.classList.add('active');
+      
+      document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+      document.getElementById('tab-' + tabName).classList.add('active');
+      
+      currentTab = tabName;
+    }
+    
+    function saveWeight() {
+      alert('体重記録機能は現在準備中です');
+    }
+    
+    function renderLatest(session) {
+      const el = document.getElementById('latest-content');
+      if (!session) {
+        el.innerHTML = '<div class="empty">まだセッションデータがありません</div>';
+        return;
+      }
+      
+      let html = `
+        <div class="session-item">
+          <div class="date">${session.ts || '日時不明'}</div>
+          <div class="trainer">担当トレーナー: ${session.trainer || '不明'}</div>
+          <span class="part">${session.part || '部位不明'}</span>
+          <div class="menu-list">
+      `;
+      
+      session.menus.forEach(m => {
+        html += `<div class="menu-item">${m.menu || '種目不明'} ${m.set || ''}</div>`;
+      });
+      
+      html += '</div></div>';
+      el.innerHTML = html;
+    }
+    
+    function renderPosture(text) {
+      const el = document.getElementById('posture-content');
+      if (!text) {
+        el.innerHTML = '<div class="empty">姿勢評価データがまだありません</div>';
+        return;
+      }
+      el.innerHTML = `<div class="ai-text">${text}</div>`;
+    }
+    
+    function renderAi2026(data, idealMetrics, progressPlan) {
+      const el = document.getElementById('ai2026-content');
+      
+      if (!data || !data.text) {
+        el.innerHTML = '<div class="empty">2026年目標分析がまだ完了していません<br>もうすぐ表示されます！</div>';
+        return;
+      }
+      
+      let statusClass = 'success';
+      if (data.status === 'ERROR' || data.status === '失敗') statusClass = 'error';
+      else if (data.status === '処理中') statusClass = 'pending';
+      
+      let html = `
+        <div style="background: #f8f9fa; padding: 16px; border-radius: 8px; margin-bottom: 20px; border-left: 4px solid #667eea;">
+          <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
+            <div>
+              <span class="ai-status ${statusClass}">${data.status || 'OK'}</span>
+              ${data.analyzedAt ? `<span style="color:#666; font-size:14px; margin-left:12px;">📅 分析日: ${data.analyzedAt}</span>` : ''}
+            </div>
+          </div>
+        </div>
+      `;
+      
+      if (data.photo) {
+        html += `
+          <div style="margin-top: 20px;">
+            <h3 style="margin-bottom: 12px; color: #333;">📸 あなたの目標写真</h3>
+            <img src="${data.photo}" class="target-photo" alt="目標写真" />
+          </div>
+        `;
+      }
+      
+      html += `
+        <div style="margin-top: 24px;">
+          <h3 style="margin-bottom: 12px; color: #333;">📊 あなた専用の達成プラン</h3>
+          <div class="ai-text">${data.text}</div>
+        </div>
+      `;
+      
+      el.innerHTML = html;
+      
+      // 進捗プランの表示
+      renderProgressPlan(progressPlan, data);
+    }
+    
+    function renderProgressPlan(plan, ai2026) {
+      const el = document.getElementById('progress-plan-content');
+      
+      if (!plan || !plan.hasPlan) {
+        el.innerHTML = '';
+        return;
+      }
+      
+      let html = '<div style="margin-top: 32px;">';
+      html += '<h3>🎯 目標達成への道のり</h3>';
+      
+      // タイムライン情報
+      if (plan.timeline) {
+        const progress = plan.timeline.weeksRemaining > 0 ? 
+          Math.max(0, Math.min(100, 100 - (plan.timeline.weeksRemaining / 48 * 100))) : 0;
+        
+        html += `
+          <div class="info-box">
+            <div class="title">⏱️ タイムライン</div>
+            <div class="content">
+              残り時間: <strong>${plan.timeline.monthsRemaining}ヶ月 (${plan.timeline.weeksRemaining}週)</strong><br>
+              目標達成日: <strong>${plan.goals.deadline}</strong><br>
+              週あたりの目標減量: <strong>${plan.timeline.weeklyWeightLoss}kg</strong>
+            </div>
+            <div class="progress-bar" style="margin-top: 12px;">
+              <div class="progress-bar-fill" style="width: ${progress}%;">${Math.round(progress)}%</div>
+            </div>
+          </div>
+        `;
+      }
+      
+      // 現在値と目標値の比較
+      html += '<div class="metrics-grid">';
+      
+      if (plan.currentStatus.weight && plan.goals.weight) {
+        const diff = plan.currentStatus.weight - plan.goals.weight;
+        html += `
+          <div class="metric-box">
+            <div class="label">体重</div>
+            <div class="value">${plan.currentStatus.weight}<span class="unit">kg</span></div>
+            <div style="font-size: 13px; color: #666; margin-top: 8px;">
+              目標: ${plan.goals.weight}kg<br>
+              残り: <strong style="color: #667eea;">${diff.toFixed(1)}kg</strong>
+            </div>
+          </div>
+        `;
+      }
+      
+      if (plan.currentStatus.bodyFat && plan.goals.bodyFat) {
+        const diff = plan.currentStatus.bodyFat - plan.goals.bodyFat;
+        html += `
+          <div class="metric-box">
+            <div class="label">体脂肪率</div>
+            <div class="value">${plan.currentStatus.bodyFat}<span class="unit">%</span></div>
+            <div style="font-size: 13px; color: #666; margin-top: 8px;">
+              目標: ${plan.goals.bodyFat}%<br>
+              残り: <strong style="color: #667eea;">${diff.toFixed(1)}%</strong>
+            </div>
+          </div>
+        `;
+      }
+      
+      if (plan.currentStatus.leanMass && plan.goals.leanMass) {
+        const diff = plan.goals.leanMass - plan.currentStatus.leanMass;
+        html += `
+          <div class="metric-box">
+            <div class="label">除脂肪体重</div>
+            <div class="value">${plan.currentStatus.leanMass}<span class="unit">kg</span></div>
+            <div style="font-size: 13px; color: #666; margin-top: 8px;">
+              目標: ${plan.goals.leanMass}kg<br>
+              増加目標: <strong style="color: #667eea;">+${diff.toFixed(1)}kg</strong>
+            </div>
+          </div>
+        `;
+      }
+      
+      if (plan.currentStatus.bmi) {
+        html += `
+          <div class="metric-box">
+            <div class="label">BMI</div>
+            <div class="value">${plan.currentStatus.bmi}</div>
+            <div style="font-size: 13px; color: #666; margin-top: 8px;">
+              ${plan.currentStatus.bmi < 18.5 ? '低体重' : 
+                plan.currentStatus.bmi < 25 ? '標準' : 
+                plan.currentStatus.bmi < 30 ? '肥満(1度)' : '肥満(2度以上)'}
+            </div>
+          </div>
+        `;
+      }
+      
+      html += '</div>';
+      
+      // レコメンデーション
+      if (plan.recommendations && plan.recommendations.length > 0) {
+        html += '<h3 style="margin-top: 24px;">💡 あなたへのアドバイス</h3>';
+        
+        plan.recommendations.forEach(rec => {
+          let priorityClass = 'good';
+          let priorityText = rec.priority;
+          
+          if (rec.priority === '高') {
+            priorityClass = 'high';
+            priorityText = '重要';
+          } else if (rec.priority === '中') {
+            priorityClass = 'medium';
+            priorityText = '推奨';
+          } else if (rec.priority === '良好') {
+            priorityClass = 'good';
+            priorityText = '継続';
+          }
+          
+          html += `
+            <div class="recommendation-item">
+              <div>
+                <span class="category">${rec.category}</span>
+                <span class="priority ${priorityClass}">${priorityText}</span>
+              </div>
+              <div class="message">${rec.message}</div>
+              <div class="action">💪 ${rec.action}</div>
+            </div>
+          `;
+        });
+      }
+      
+      html += '</div>';
+      el.innerHTML = html;
+    }
+    
+    function renderIdealMetrics(metrics, ai2026) {
+      const el = document.getElementById('ideal-content');
+      
+      if (!metrics || !metrics.hasHeight) {
+        el.innerHTML = `
+          <div class="empty">
+            身長データが登録されていないため、理想値を計算できません。<br>
+            トレーナーに身長データの登録をお願いしてください。
+          </div>
+        `;
+        return;
+      }
+      
+      let html = `
+        <div class="info-box">
+          <div class="title">📏 あなたの身体データ</div>
+          <div class="content">
+            身長: <strong>${metrics.height}cm</strong>
+            ${metrics.bmi ? `<br>現在のBMI: <strong>${metrics.bmi}</strong>` : ''}
+          </div>
+        </div>
+      `;
+      
+      html += '<h3>🎯 理想の体組成</h3>';
+      html += '<div class="metrics-grid">';
+      
+      html += `
+        <div class="metric-box">
+          <div class="label">理想体重 (BMI 22基準)</div>
+          <div class="value">${metrics.idealWeight}<span class="unit">kg</span></div>
+        </div>
+      `;
+      
+      html += `
+        <div class="metric-box">
+          <div class="label">理想体脂肪率</div>
+          <div class="value">${metrics.idealBodyFat}<span class="unit">%</span></div>
+          <div style="font-size: 12px; color: #999; margin-top: 4px;">アスリート基準</div>
+        </div>
+      `;
+      
+      html += `
+        <div class="metric-box">
+          <div class="label">理想除脂肪体重</div>
+          <div class="value">${metrics.idealLeanMass}<span class="unit">kg</span></div>
+          <div style="font-size: 12px; color: #999; margin-top: 4px;">筋肉量の目安</div>
+        </div>
+      `;
+      
+      html += '</div>';
+      
+      // 目標との比較
+      if (ai2026 && ai2026.currentWeight && ai2026.targetWeight) {
+        html += '<h3 style="margin-top: 24px;">📊 現在値と目標値の比較</h3>';
+        html += '<div class="metrics-grid">';
+        
+        html += `
+          <div class="metric-box">
+            <div class="label">体重</div>
+            <div class="value">${ai2026.currentWeight}<span class="unit">kg</span></div>
+            <div style="font-size: 13px; color: #666; margin-top: 8px;">
+              目標: ${ai2026.targetWeight}kg<br>
+              理想: ${metrics.idealWeight}kg
+            </div>
+          </div>
+        `;
+        
+        if (ai2026.currentBodyFat && ai2026.targetBodyFat) {
+          html += `
+            <div class="metric-box">
+              <div class="label">体脂肪率</div>
+              <div class="value">${ai2026.currentBodyFat}<span class="unit">%</span></div>
+              <div style="font-size: 13px; color: #666; margin-top: 8px;">
+                目標: ${ai2026.targetBodyFat}%<br>
+                理想: ${metrics.idealBodyFat}%
+              </div>
+            </div>
+          `;
+        }
+        
+        if (ai2026.currentLeanMass && ai2026.targetLeanMass) {
+          html += `
+            <div class="metric-box">
+              <div class="label">除脂肪体重</div>
+              <div class="value">${ai2026.currentLeanMass}<span class="unit">kg</span></div>
+              <div style="font-size: 13px; color: #666; margin-top: 8px;">
+                目標: ${ai2026.targetLeanMass}kg<br>
+                理想: ${metrics.idealLeanMass}kg
+              </div>
+            </div>
+          `;
+        }
+        
+        html += '</div>';
+      }
+      
+      // 栄養計算
+      if (metrics.calculations) {
+        html += '<h3 style="margin-top: 24px;">🍽️ 栄養ガイド</h3>';
+        html += '<div class="metrics-grid">';
+        
+        if (metrics.calculations.bmrRange) {
+          html += `
+            <div class="metric-box">
+              <div class="label">基礎代謝量</div>
+              <div class="value">${metrics.calculations.bmrRange.min}-${metrics.calculations.bmrRange.max}<span class="unit">kcal</span></div>
+              <div style="font-size: 12px; color: #999; margin-top: 4px;">何もしなくても消費</div>
+            </div>
+          `;
+        }
+        
+        if (metrics.calculations.maintenanceCalories) {
+          html += `
+            <div class="metric-box">
+              <div class="label">維持カロリー</div>
+              <div class="value">${metrics.calculations.maintenanceCalories}<span class="unit">kcal</span></div>
+              <div style="font-size: 12px; color: #999; margin-top: 4px;">体重維持に必要</div>
+            </div>
+          `;
+        }
+        
+        if (metrics.calculations.proteinNeeds) {
+          html += `
+            <div class="metric-box">
+              <div class="label">推奨タンパク質量</div>
+              <div class="value">${metrics.calculations.proteinNeeds.min}-${metrics.calculations.proteinNeeds.max}<span class="unit">g</span></div>
+              <div style="font-size: 12px; color: #999; margin-top: 4px;">1日の目標摂取量</div>
+            </div>
+          `;
+        }
+        
+        html += '</div>';
+        
+        // カロリーガイド
+        if (ai2026 && ai2026.currentWeight && ai2026.targetWeight) {
+          const weightDiff = ai2026.currentWeight - ai2026.targetWeight;
+          let calorieAdvice = '';
+          
+          if (weightDiff > 0) {
+            const deficitCalories = metrics.calculations.maintenanceCalories - 500;
+            calorieAdvice = `
+              <div class="info-box" style="margin-top: 16px;">
+                <div class="title">🎯 減量のためのカロリー設定</div>
+                <div class="content">
+                  目標: <strong>約${deficitCalories}kcal/日</strong><br>
+                  (維持カロリー ${metrics.calculations.maintenanceCalories}kcal から 500kcal 減)<br><br>
+                  この設定で週約0.5kgペースで減量できます。
+                </div>
+              </div>
+            `;
+          } else if (weightDiff < 0) {
+            const surplusCalories = metrics.calculations.maintenanceCalories + 300;
+            calorieAdvice = `
+              <div class="info-box" style="margin-top: 16px;">
+                <div class="title">🎯 増量のためのカロリー設定</div>
+                <div class="content">
+                  目標: <strong>約${surplusCalories}kcal/日</strong><br>
+                  (維持カロリー ${metrics.calculations.maintenanceCalories}kcal に 300kcal 追加)<br><br>
+                  筋肉を増やしながら健康的に増量できます。
+                </div>
+              </div>
+            `;
+          }
+          
+          html += calorieAdvice;
+        }
+      }
+      
+      el.innerHTML = html;
+    }
+    
+    function renderHistory(list) {
+      const el = document.getElementById('history-content');
+      if (!list || list.length === 0) {
+        el.innerHTML = '<div class="empty">履歴データがまだありません</div>';
+        return;
+      }
+      
+      let html = '';
+      list.forEach(s => {
+        html += `
+          <div class="session-item">
+            <div class="date">${s.ts || '日時不明'}</div>
+            <div class="trainer">担当: ${s.trainer || '不明'}</div>
+            <span class="part">${s.part || '部位不明'}</span>
+            <div class="menu-list">
+        `;
+        
+        s.menus.forEach(m => {
+          html += `<div class="menu-item">${m.menu || '種目不明'} ${m.set || ''}</div>`;
+        });
+        
+        html += '</div></div>';
+      });
+      
+      el.innerHTML = html;
+    }
+    
+    function renderWeightLog(log) {
+      if (!log || log.length === 0) {
+        document.getElementById('weight-list').innerHTML = '<div class="empty">体重記録がまだありません<br>上のフォームから記録してみましょう！</div>';
+        document.getElementById('weight-chart').innerHTML = '';
+        return;
+      }
+      
+      const recent = log.slice(0, 30).reverse();
+      const max = Math.max(...recent.map(r => r.weight));
+      const min = Math.min(...recent.map(r => r.weight));
+      const range = max - min || 1;
+      
+      let chartHtml = '<div style="background: white; padding: 20px; border-radius: 8px; margin-bottom: 20px;">';
+      chartHtml += '<h3 style="margin-bottom: 16px; color: #333;">📈 推移グラフ（直近30日）</h3>';
+      chartHtml += '<div style="display: flex; align-items: flex-end; height: 200px; gap: 4px;">';
+      
+      recent.forEach((r, i) => {
+        const height = ((r.weight - min) / range) * 180 + 20;
+        const date = r.date.split(' ')[0].slice(5);
+        chartHtml += `
+          <div style="flex: 1; display: flex; flex-direction: column; align-items: center;">
+            <div style="font-size: 11px; color: #667eea; font-weight: 600; margin-bottom: 4px;">${r.weight}kg</div>
+            <div style="width: 100%; background: linear-gradient(180deg, #667eea 0%, #764ba2 100%); border-radius: 4px 4px 0 0; height: ${height}px;"></div>
+            <div style="font-size: 10px; color: #999; margin-top: 4px; writing-mode: vertical-rl;">${date}</div>
+          </div>
+        `;
+      });
+      
+      chartHtml += '</div></div>';
+      document.getElementById('weight-chart').innerHTML = chartHtml;
+      
+      let listHtml = '<h3 style="margin: 20px 0 12px 0; color: #333;">📋 記録一覧</h3>';
+      log.forEach(r => {
+        listHtml += `
+          <div style="padding: 12px; background: #f8f9fa; border-left: 3px solid #667eea; border-radius: 4px; margin-bottom: 8px;">
+            <span style="font-weight: 600; color: #333;">${r.date}</span>
+            <span style="margin: 0 12px; color: #667eea; font-size: 18px; font-weight: 600;">${r.weight}kg</span>
+            <span style="font-size: 12px; color: #999;">${r.source}</span>
+          </div>
+        `;
+      });
+      
+      document.getElementById('weight-list').innerHTML = listHtml;
+    }
+  </script>
+</body>
+</html>
