@@ -105,6 +105,74 @@ ${EMAIL_FOOTER}
 }
 
 /**
+ * キャンセル通知メールを会員とAbodyに送信。
+ */
+export async function sendCancellationEmail(params: {
+  memberEmail: string;
+  memberName: string;
+  dateStr: string;
+  timeStr: string;
+  abodyEmail?: string;
+}): Promise<{ member: boolean; abody: boolean }> {
+  const transporter = getTransporter();
+  const from = process.env.MAIL_FROM || process.env.SMTP_USER || 'noreply@localhost';
+  const subject = '【Abodyジム】予約がキャンセルされました';
+  const textToMember = `
+${params.memberName} 様
+
+以下の日程のAbody上野店ジム利用予約がキャンセルされました。
+
+――――――――――
+【キャンセルした予約】
+日付：${params.dateStr}
+時間：${params.timeStr}
+――――――――――
+
+再度ご予約の場合は予約ページよりお手続きください。
+
+${EMAIL_FOOTER}
+`;
+  const result = { member: false, abody: false };
+  if (transporter) {
+    try {
+      await transporter.sendMail({
+        from: from!,
+        to: params.memberEmail,
+        subject,
+        text: textToMember.trim(),
+      });
+      result.member = true;
+    } catch (err: any) {
+      console.error('Send cancellation email to member failed:', err?.message);
+    }
+    const abodyTo = params.abodyEmail || process.env.ABODY_EMAIL;
+    if (abodyTo) {
+      try {
+        const textToAbody = `
+【予約キャンセル通知】
+会員名：${params.memberName}
+会員メール：${params.memberEmail}
+日付：${params.dateStr}
+時間：${params.timeStr}
+
+上記の予約がキャンセルされました。
+`.trim();
+        await transporter.sendMail({
+          from: from!,
+          to: abodyTo,
+          subject: `【Abodyジム】予約キャンセル ${params.memberName} 様`,
+          text: textToAbody,
+        });
+        result.abody = true;
+      } catch (err: any) {
+        console.error('Send cancellation email to Abody failed:', err?.message);
+      }
+    }
+  }
+  return result;
+}
+
+/**
  * リマインドメールを送信。SMTP未設定の場合は送信せず true を返す。
  */
 export async function sendReminderEmail(params: {

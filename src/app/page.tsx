@@ -128,6 +128,12 @@ export default function Home() {
     emailSent: boolean;
   } | null>(null);
 
+  const [myCarteMemberId, setMyCarteMemberId] = useState('');
+  const [myCartePin, setMyCartePin] = useState('');
+  const [myCarteLoading, setMyCarteLoading] = useState(false);
+  const [myCarteError, setMyCarteError] = useState('');
+  const [myCarteData, setMyCarteData] = useState<{ memberName: string; bookings: { bookingId: string; start: string; end: string; createdAt: string }[] } | null>(null);
+
   const formatTime = (iso: string) => {
     const date = new Date(iso);
     const hours = date.getHours().toString().padStart(2, '0');
@@ -477,6 +483,93 @@ export default function Home() {
           <div className="loading">空き枠を取得中...</div>
         </div>
       )}
+
+      <div className="card" style={{ marginTop: '24px', background: '#f0f7ff' }}>
+        <h3 style={{ marginTop: 0, fontSize: '16px', color: '#333' }}>マイカルテ（予約状況の確認）</h3>
+        <p style={{ margin: '0 0 12px', fontSize: '13px', color: '#666' }}>
+          会員IDとPINを入力して、ご自身の予約一覧を確認できます。
+        </p>
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px', marginBottom: '12px' }}>
+          <input
+            type="text"
+            placeholder="会員ID"
+            value={myCarteMemberId}
+            onChange={(e) => setMyCarteMemberId(e.target.value)}
+            style={{ padding: '8px 12px', borderRadius: '4px', border: '1px solid #ccc', fontSize: '14px', minWidth: '120px' }}
+          />
+          <input
+            type="password"
+            placeholder="PIN"
+            value={myCartePin}
+            onChange={(e) => setMyCartePin(e.target.value)}
+            style={{ padding: '8px 12px', borderRadius: '4px', border: '1px solid #ccc', fontSize: '14px', minWidth: '80px' }}
+          />
+          <button
+            onClick={async () => {
+              setMyCarteError('');
+              setMyCarteData(null);
+              if (!myCarteMemberId.trim() || !myCartePin.trim()) {
+                setMyCarteError('会員IDとPINを入力してください。');
+                return;
+              }
+              setMyCarteLoading(true);
+              try {
+                const res = await fetch('/api/my-bookings', {
+                  method: 'POST',
+                  headers: { 'Content-Type': 'application/json' },
+                  body: JSON.stringify({ memberId: myCarteMemberId.trim(), pin: myCartePin }),
+                });
+                const data = await res.json();
+                if (res.ok) {
+                  setMyCarteData({ memberName: data.memberName, bookings: data.bookings || [] });
+                } else {
+                  setMyCarteError(data.error || '予約一覧の取得に失敗しました。');
+                }
+              } catch (e: any) {
+                setMyCarteError(e.message || '通信エラー');
+              } finally {
+                setMyCarteLoading(false);
+              }
+            }}
+            disabled={myCarteLoading}
+            style={{
+              padding: '8px 16px',
+              background: myCarteLoading ? '#999' : 'var(--primary)',
+              color: 'white',
+              border: 'none',
+              borderRadius: '4px',
+              cursor: myCarteLoading ? 'not-allowed' : 'pointer',
+              fontSize: '14px',
+            }}
+          >
+            {myCarteLoading ? '取得中...' : '予約状況を表示'}
+          </button>
+        </div>
+        {myCarteError && <p style={{ margin: '0 0 8px', fontSize: '14px', color: '#c00' }}>{myCarteError}</p>}
+        {myCarteData && (
+          <div style={{ marginTop: '12px' }}>
+            <p style={{ margin: '0 0 8px', fontWeight: 600, fontSize: '14px' }}>{myCarteData.memberName} 様の予約一覧</p>
+            {myCarteData.bookings.length === 0 ? (
+              <p style={{ margin: 0, fontSize: '14px', color: '#666' }}>予約はありません。</p>
+            ) : (
+              <ul style={{ margin: 0, paddingLeft: '20px', fontSize: '14px', color: '#333' }}>
+                {myCarteData.bookings.map((b) => {
+                  const start = new Date(b.start);
+                  const dateStr = `${start.getFullYear()}/${(start.getMonth() + 1).toString().padStart(2, '0')}/${start.getDate().toString().padStart(2, '0')}`;
+                  const timeStr = `${start.getHours().toString().padStart(2, '0')}:${start.getMinutes().toString().padStart(2, '0')}`;
+                  const isPast = start.getTime() < Date.now();
+                  return (
+                    <li key={b.bookingId} style={{ marginBottom: '4px' }}>
+                      {dateStr} {timeStr} 〜 {b.bookingId}
+                      {isPast && <span style={{ marginLeft: '8px', color: '#888', fontSize: '12px' }}>（終了）</span>}
+                    </li>
+                  );
+                })}
+              </ul>
+            )}
+          </div>
+        )}
+      </div>
 
     </div>
   );

@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server';
 import { getSheetsClient } from '@/lib/google';
 import { toJapaneseError } from '@/lib/errorMessages';
 
-/** 「data」シートの1行目にヘッダー（A1〜Q1）を書き込む。初回セットアップ用。日本語表示。 */
+/** 「data」シートの1行目にヘッダー（A1〜R1）を書き込む。初回セットアップ用。日本語表示。 */
 const DATA_HEADER_ROW = [
   '会員ID',
   '名前',
@@ -21,6 +21,7 @@ const DATA_HEADER_ROW = [
   'イベントID',
   '作成日時',
   'リマインド送信済', // Q
+  'キャンセル済み', // R
 ];
 
 export async function POST() {
@@ -36,7 +37,7 @@ export async function POST() {
     const sheets = getSheetsClient();
     await sheets.spreadsheets.values.update({
       spreadsheetId: sheetId,
-      range: 'data!A1:Q1',
+      range: 'data!A1:R1',
       valueInputOption: 'RAW',
       requestBody: {
         values: [DATA_HEADER_ROW],

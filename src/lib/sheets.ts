@@ -9,8 +9,75 @@ const MEMBERS_APPEND_RANGE = `${DATA_SHEET}!A:F`;
 const USAGE_RANGE = `${DATA_SHEET}!G2:I`;
 const USAGE_APPEND_RANGE = `${DATA_SHEET}!G:I`;
 const BOOKINGS_APPEND_RANGE = `${DATA_SHEET}!K:P`;
-/** 予約ログ読み取り（リマインド用・Q列=リマインド送信済み含む） */
-const BOOKINGS_READ_RANGE = `${DATA_SHEET}!K2:Q`;
+/** 予約ログ読み取り（リマインド用・Q列=リマインド送信済み、R列=キャンセル済み） */
+const BOOKINGS_READ_RANGE = `${DATA_SHEET}!K2:R`;
+
+/** 会員の予約一覧（マイカルテ用）。開始日時の新しい順。キャンセル済みは除外。 */
+export interface MemberBooking {
+  bookingId: string;
+  memberId: string;
+  start: string;
+  end: string;
+  createdAt: string;
+}
+
+export async function getBookingsByMemberId(memberId: string): Promise<MemberBooking[]> {
+  const rows = await getSheetValues(BOOKINGS_READ_RANGE);
+  const normalized = String(memberId || '').trim();
+  const result: MemberBooking[] = [];
+  for (const row of rows) {
+    if (!row || row.length < 6) continue;
+    if (String(row[7] || '').toUpperCase() === 'TRUE') continue; // R列=キャンセル済み
+    const rowMemberId = String(row[1] || '').trim();
+    if (rowMemberId !== normalized) continue;
+    result.push({
+      bookingId: String(row[0] || ''),
+      memberId: rowMemberId,
+      start: String(row[2] || ''),
+      end: String(row[3] || ''),
+      createdAt: String(row[5] || ''),
+    });
+  }
+  result.sort((a, b) => new Date(b.start).getTime() - new Date(a.start).getTime());
+  return result;
+}
+
+/** 予約IDで予約行を取得（キャンセル用）。見つからなければ null。rowIndex は 2 始まり。 */
+export async function getBookingRowByBookingId(bookingId: string): Promise<{
+  rowIndex: number;
+  eventId: string;
+  memberId: string;
+  start: string;
+  end: string;
+} | null> {
+  const rows = await getSheetValues(BOOKINGS_READ_RANGE);
+  const bid = String(bookingId || '').trim();
+  for (let i = 0; i < rows.length; i++) {
+    const row = rows[i];
+    if (!row || row.length < 5) continue;
+    if (String(row[7] || '').toUpperCase() === 'TRUE') continue;
+    if (String(row[0] || '').trim() !== bid) continue;
+    return {
+      rowIndex: i + 2,
+      eventId: String(row[4] || ''),
+      memberId: String(row[1] || '').trim(),
+      start: String(row[2] || ''),
+      end: String(row[3] || ''),
+    };
+  }
+  return null;
+}
+
+/** 予約ログの R 列（キャンセル済み）を TRUE にする */
+export async function setBookingCancelled(rowIndex: number): Promise<void> {
+  const sheets = getSheetsClient();
+  await sheets.spreadsheets.values.update({
+    spreadsheetId: SHEET_ID,
+    range: `${DATA_SHEET}!R${rowIndex}`,
+    valueInputOption: 'RAW',
+    requestBody: { values: [['TRUE']] },
+  });
+}
 
 export interface Member {
   memberId: string;
@@ -188,6 +255,7 @@ export async function getBookingsForReminder(): Promise<BookingForReminder[]> {
   for (let i = 0; i < rows.length; i++) {
     const row = rows[i];
     if (!row || row.length < 6) continue;
+    if (String(row[7] || '').toUpperCase() === 'TRUE') continue; // キャンセル済み除外
     const reminderSent = String(row[6] || '').toUpperCase() === 'TRUE';
     if (reminderSent) continue;
     const start = String(row[2] || '').trim();

@@ -49,6 +49,15 @@ export async function createEvent(
   return response.data.id || '';
 }
 
+export async function deleteEvent(eventId: string): Promise<void> {
+  if (!eventId?.trim()) return;
+  const calendar = getCalendarClient();
+  await calendar.events.delete({
+    calendarId: CALENDAR_ID,
+    eventId: eventId.trim(),
+  });
+}
+
 export function generateTimeSlots(date: DateTime): TimeSlot[] {
   const slots: TimeSlot[] = [];
   const openHour = parseInt(process.env.OPEN_HOUR || '9', 10);
