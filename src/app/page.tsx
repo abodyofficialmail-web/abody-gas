@@ -288,7 +288,7 @@ export default function Home() {
         }
       }
 
-      setRemaining(data.remaining);
+      setRemaining(data.remaining ?? null);
       setPendingSlot(null);
       setShowConfirm(false);
       setLastBooking({

@@ -11,8 +11,9 @@ export async function POST(request: NextRequest) {
   try {
     const body = await request.json().catch(() => ({}));
     const { sheetName } = bodySchema.parse({ sheetName: body?.sheetName || 'メンバーシート' });
+    const sheetNameStr = sheetName ?? 'メンバーシート';
     const membersSheetId = process.env.MEMBERS_SHEET_ID;
-    const result = await syncMembersFromSheet(sheetName, membersSheetId);
+    const result = await syncMembersFromSheet(sheetNameStr, membersSheetId);
     const msgParts = [];
     if (result.synced > 0) msgParts.push(`${result.synced}件をdataに追加`);
     if (result.updated > 0) msgParts.push(`${result.updated}件のメールアドレスをdataのF列に反映しました`);
