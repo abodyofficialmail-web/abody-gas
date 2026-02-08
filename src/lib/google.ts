@@ -66,14 +66,14 @@ export function getAuthClient() {
   if (privateKey.includes('\\n')) {
     privateKey = privateKey.replace(/\\n/g, '\n');
   }
-  // Vercel などで改行が消えて1行になっている場合に PEM 形式に復元
-  if (privateKey.includes('-----BEGIN') && privateKey.includes('-----END') && !privateKey.includes('\n')) {
-    const begin = '-----BEGIN PRIVATE KEY-----';
-    const end = '-----END PRIVATE KEY-----';
+  // Vercel などで改行が消えたり空白が混じった場合に PEM 形式に正規化
+  const begin = '-----BEGIN PRIVATE KEY-----';
+  const end = '-----END PRIVATE KEY-----';
+  if (privateKey.includes(begin) && privateKey.includes(end)) {
     const start = privateKey.indexOf(begin) + begin.length;
     const finish = privateKey.indexOf(end);
     const base64 = privateKey.slice(start, finish).replace(/\s/g, '');
-    const lines = [];
+    const lines: string[] = [];
     for (let i = 0; i < base64.length; i += 64) {
       lines.push(base64.slice(i, i + 64));
     }
