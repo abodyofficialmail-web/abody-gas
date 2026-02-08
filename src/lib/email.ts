@@ -10,15 +10,13 @@ function getTransporter() {
   const port = process.env.SMTP_PORT;
   const user = process.env.SMTP_USER;
   const pass = process.env.SMTP_PASS;
-  const options: nodemailer.TransportOptions = {
+  const options = {
     host,
     port: port ? parseInt(port, 10) : 587,
     secure: process.env.SMTP_SECURE === 'true',
+    ...(user && pass ? { auth: { user, pass } } : {}),
   };
-  if (user && pass) {
-    options.auth = { user, pass };
-  }
-  return nodemailer.createTransport(options);
+  return nodemailer.createTransport(options as nodemailer.TransportOptions);
 }
 
 /** 店舗情報・ルール・LINE（予約メール・リマインド共通） */

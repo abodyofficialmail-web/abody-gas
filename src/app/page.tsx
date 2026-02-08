@@ -265,7 +265,16 @@ export default function Home() {
       });
 
       const text = await response.text();
-      let data: { bookingId?: string; remaining?: number | null; error?: string; message?: string } = {};
+      let data: {
+        bookingId?: string;
+        dateStr?: string;
+        timeStr?: string;
+        memberName?: string;
+        remaining?: number | null;
+        emailSent?: boolean;
+        error?: string;
+        message?: string;
+      } = {};
       try {
         data = text ? JSON.parse(text) : {};
       } catch {
@@ -292,7 +301,7 @@ export default function Home() {
       setPendingSlot(null);
       setShowConfirm(false);
       setLastBooking({
-        bookingId: data.bookingId,
+        bookingId: data.bookingId ?? '',
         dateStr: data.dateStr ?? '',
         timeStr: data.timeStr ?? '',
         memberName: data.memberName ?? memberName,
