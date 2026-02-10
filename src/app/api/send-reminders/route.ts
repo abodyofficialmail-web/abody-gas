@@ -2,7 +2,11 @@ import { NextRequest, NextResponse } from 'next/server';
 import { getBookingsForReminder, markReminderSent, getMember } from '@/lib/sheets';
 import { sendReminderEmail } from '@/lib/email';
 
-/** 日本時間（Asia/Tokyo）で日付・時刻をフォーマット（サーバーがUTCでも正しく表示） */
+/**
+ * ジム個室利用リマインドメールの時間ずれ修正
+ * 原因: サーバー(Vercel)がUTCのため getHours() 等で日本時間とずれていた
+ * 対応: 日付・時刻を常に Asia/Tokyo でフォーマットしてメールに表示
+ */
 const JST = 'Asia/Tokyo';
 
 function formatDateStr(iso: string): string {
