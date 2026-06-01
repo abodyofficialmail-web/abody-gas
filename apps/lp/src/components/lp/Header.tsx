@@ -9,11 +9,21 @@ const STORES = [
   { id: "ebisu", name: "恵比寿店" },
   { id: "ueno", name: "上野店" },
   { id: "sakuragicho", name: "桜木町店" },
+  { id: "shinjuku", name: "新宿店" },
 ];
 
 export function LPHeader() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [selectedStore, setSelectedStore] = useState("ebisu");
+
+  const handleLineClick = (url: string) => {
+    const w = window as unknown as { gtag_report_conversion?: (u: string) => boolean };
+    if (w.gtag_report_conversion) {
+      w.gtag_report_conversion(url);
+    } else {
+      window.location.href = url;
+    }
+  };
 
   return (
     <header className="sticky top-0 z-50 bg-white/95 backdrop-blur border-b border-neutral-100">
@@ -31,9 +41,18 @@ export function LPHeader() {
               <option key={s.id} value={s.id}>{s.name}</option>
             ))}
           </select>
-          <Link href={LINE_URL} target="_blank" rel="noopener noreferrer" className="text-sm font-medium px-4 py-2 rounded-2xl bg-abody-teal text-white shadow-soft hover:bg-abody-teal-dark transition-colors">
+          <a
+            href={LINE_URL}
+            onClick={(e) => {
+              e.preventDefault();
+              handleLineClick(LINE_URL);
+              return false;
+            }}
+            className="text-sm font-medium px-4 py-2 rounded-2xl bg-abody-teal text-white shadow-soft hover:bg-abody-teal-dark transition-colors"
+            aria-label="LINEで無料体験を予約"
+          >
             体験無料
-          </Link>
+          </a>
         </nav>
         <button type="button" className="md:hidden p-2 text-neutral-600" onClick={() => setMobileMenuOpen(!mobileMenuOpen)} aria-label="メニュー">
           {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
@@ -48,9 +67,19 @@ export function LPHeader() {
                 {s.name}
               </button>
             ))}
-            <Link href={LINE_URL} target="_blank" rel="noopener noreferrer" className="block mt-4 text-center py-3 rounded-2xl bg-abody-teal text-white font-medium" onClick={() => setMobileMenuOpen(false)}>
+            <a
+              href={LINE_URL}
+              onClick={(e) => {
+                e.preventDefault();
+                setMobileMenuOpen(false);
+                handleLineClick(LINE_URL);
+                return false;
+              }}
+              className="block mt-4 text-center py-3 rounded-2xl bg-abody-teal text-white font-medium"
+              aria-label="LINEで無料体験を予約"
+            >
               体験無料
-            </Link>
+            </a>
           </div>
         </div>
       )}

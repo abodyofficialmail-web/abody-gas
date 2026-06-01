@@ -18,7 +18,7 @@ export function LPCampaign() {
               <div className="relative w-full max-w-[720px] aspect-[16/9] mx-auto">
                 <Image
                   src="/campaign.png"
-                  alt="今だけキャンペーン 受け放題パーソナル980円"
+                  alt="ダイエットキャンペーン 通い放題パーソナルトレーニング"
                   fill
                   className={CAMPAIGN_FIT === "contain" ? "object-contain" : "object-cover"}
                   sizes="(max-width: 768px) 100vw, 720px"
@@ -27,18 +27,59 @@ export function LPCampaign() {
               </div>
             </div>
             <div className="p-6 sm:p-8 text-center">
-              <h2 className="text-base sm:text-lg font-bold text-neutral-900 mb-4 tracking-wide">キャンペーン</h2>
-              <p className="text-neutral-600 mb-3 text-base sm:text-lg">通常3,500円の体験トレーニングが期間限定で0円</p>
-              <p className="text-2xl sm:text-3xl font-bold text-abody-teal mb-6">
-                <span className="line-through text-neutral-500 font-normal">3,500円</span>
-                <span className="mx-2">→</span>
-                <span>0円</span>
-              </p>
-              <p className="text-neutral-600 mb-6 text-sm">現在実施中のキャンペーンはLINEでご確認ください。</p>
+              <h2 className="text-base sm:text-lg font-bold text-neutral-900 mb-6 tracking-wide">キャンペーン</h2>
+
+              <div className="text-left max-w-lg mx-auto space-y-5 text-neutral-700 text-sm sm:text-base">
+                <p>
+                  <span className="font-bold text-neutral-900">⏰ キャンペーン期間</span>
+                  <br />
+                  5/1（金）〜5/17（日）まで
+                </p>
+                <p className="font-medium">各店舗5名様限定のキャンペーン！</p>
+                <p>
+                  通常<span className="font-semibold">28,000円</span>のプランが
+                  <br />
+                  <span className="text-abody-teal font-bold text-lg sm:text-xl">
+                    14,000円（税別）
+                  </span>
+                  でご利用可能に🔥
+                </p>
+
+                <hr className="border-neutral-200" />
+
+                <p className="font-bold text-neutral-900">さらに、</p>
+                <p>
+                  <span className="font-bold">👑先着5名様限定で</span>
+                  <br />
+                  <span className="text-abody-teal font-bold">2ヶ月目も50%OFF（14,000円）🔥</span>
+                </p>
+
+                <hr className="border-neutral-200" />
+
+                <p className="font-bold text-neutral-900">6名様以降の方は</p>
+                <p>
+                  <span className="mr-1">👉</span>
+                  <span className="font-bold text-abody-teal">初月のみ50%OFF（14,000円）</span>
+                </p>
+
+                <hr className="border-neutral-200" />
+
+                <p className="font-bold text-neutral-900">また、</p>
+                <p>
+                  🎁 初回体験トレーニングも無料（通常3,000円 → <span className="font-bold text-abody-teal">0円</span>）
+                </p>
+
+                <hr className="border-neutral-200" />
+
+                <p className="text-neutral-600 text-xs sm:text-sm">
+                  ※先着順のため、定員に達し次第終了となります。
+                </p>
+              </div>
+
               <button
                 type="button"
                 onClick={() => setModalOpen(true)}
-                className="inline-block px-6 py-3 rounded-2xl bg-abody-teal text-white font-semibold hover:bg-abody-teal-dark transition-colors"
+                className="mt-8 inline-block px-6 py-3 rounded-2xl bg-abody-teal text-white font-semibold hover:bg-abody-teal-dark transition-colors"
               >
                 キャンペーンを見る
               </button>
