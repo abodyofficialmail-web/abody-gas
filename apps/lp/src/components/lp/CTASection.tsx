@@ -18,7 +18,7 @@ const STORES = [
   { id: "ueno", name: "上野店", buttonClass: "bg-green-600 focus-visible:ring-green-500 hover:bg-green-700 text-white", hasLineLink: true },
   { id: "sakuragicho", name: "桜木町店", buttonClass: "bg-amber-500 focus-visible:ring-amber-400 hover:bg-amber-600 text-neutral-900", hasLineLink: true },
   { id: "shinjuku", name: "新宿店", buttonClass: "bg-purple-600 focus-visible:ring-purple-500 hover:bg-purple-700 text-white", hasLineLink: true },
-  { id: "fukuoka", name: "福岡店", buttonClass: "bg-rose-500 focus-visible:ring-rose-400 hover:bg-rose-600 text-white", hasLineLink: false },
+  { id: "fukuoka", name: "福岡店", buttonClass: "bg-rose-500 focus-visible:ring-rose-400 hover:bg-rose-600 text-white", hasLineLink: true },
 ] as const;
 
 function LineButton({

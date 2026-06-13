@@ -4,6 +4,7 @@ export const LINE_URL_UENO = "https://lin.ee/j02i6sq";
 export const LINE_URL_SAKURAGICHO = "https://lin.ee/X2nEVKr";
 export const LINE_URL_SHINJUKU =
   process.env.NEXT_PUBLIC_LINE_URL_SHINJUKU || "https://lin.ee/67ezcOd";
+export const LINE_URL_FUKUOKA = "https://lin.ee/spUXr6b";
 
 /** 店舗ID → LINE予約URL */
 export const LINE_URL_BY_STORE: Record<string, string> = {
@@ -11,6 +12,7 @@ export const LINE_URL_BY_STORE: Record<string, string> = {
   ueno: LINE_URL_UENO,
   sakuragicho: LINE_URL_SAKURAGICHO,
   shinjuku: LINE_URL_SHINJUKU,
+  fukuoka: LINE_URL_FUKUOKA,
 };
 
 /** 共通LINE（ヘッダー・キャンペーン等で未指定時のフォールバック＝恵比寿店） */

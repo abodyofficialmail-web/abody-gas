@@ -26,7 +26,7 @@ const STORES = [
   { id: "ueno", name: "上野店", borderColor: "#22c55e", address: "東京都台東区台東4-31-5オリオンビル4F", access: "上野駅 徒歩3分", hours: "9:00〜22:00", feature: "マシンピラティス導入", pilates: true, mapUrl: "https://www.google.com/maps/search/?api=1&query=東京都台東区台東4-31-5", hasPrivateRoomBooking: true, hasLineLink: true },
   { id: "sakuragicho", name: "桜木町店", borderColor: "#eab308", address: "横浜市中区野毛町2-59パストラル野毛マリヤ201", access: "桜木町駅 徒歩1分", hours: "9:00〜22:00", feature: "マシンピラティス導入", pilates: true, mapUrl: "https://www.google.com/maps/search/?api=1&query=横浜市中区野毛町2-59パストラル野毛マリヤ201", hasPrivateRoomBooking: false, hasLineLink: true },
   { id: "shinjuku", name: "新宿店", borderColor: "#a855f7", address: "東京都新宿区西新宿7-22-39", access: "新宿駅 徒歩5分", hours: "9:00〜22:00", feature: "パーソナル中心", pilates: false, mapUrl: "https://www.google.com/maps/search/?api=1&query=東京都新宿区西新宿7-22-39", hasPrivateRoomBooking: false, hasLineLink: true },
-  { id: "fukuoka", name: "福岡店", borderColor: "#f43f5e", address: "福岡市中央区大名2-11-15 Shin-Akasakamon 3F", access: "赤坂駅 徒歩2分", hours: "9:00〜22:00", feature: "パーソナル中心", pilates: false, mapUrl: "https://www.google.com/maps/search/?api=1&query=福岡市中央区大名2-11-15+Shin-Akasakamon", hasPrivateRoomBooking: false, hasLineLink: false },
+  { id: "fukuoka", name: "福岡店", borderColor: "#f43f5e", address: "福岡市中央区大名2-11-15 Shin-Akasakamon 3F", access: "赤坂駅 徒歩2分", hours: "9:00〜22:00", feature: "パーソナル中心", pilates: false, mapUrl: "https://www.google.com/maps/search/?api=1&query=福岡市中央区大名2-11-15+Shin-Akasakamon", hasPrivateRoomBooking: false, hasLineLink: true },
 ];
 
 export function LPLocations() {
