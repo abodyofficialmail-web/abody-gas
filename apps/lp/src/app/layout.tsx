@@ -3,6 +3,7 @@ import { Noto_Sans_JP, Shippori_Mincho } from "next/font/google";
 import Script from "next/script";
 import { LPTopCampaignBar } from "@/components/lp/TopCampaignBar";
 import { LPFixedCampaignBanner } from "@/components/lp/FixedCampaignBanner";
+import { GoogleAdsVisitorTracker } from "@/components/lp/GoogleAdsVisitorTracker";
 import "./globals.css";
 
 const GTAG_ID = "AW-17030988109";
@@ -53,52 +54,30 @@ export default function RootLayout({
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
             gtag('config', '${GTAG_ID}');
-            function gtag_report_conversion(url) {
-              var callback = function () {
-                if (typeof(url) != 'undefined') {
-                  window.location = url;
-                }
-              };
-              if (window.gtag) {
-                window.gtag('event', 'conversion', {
-                  'send_to': '${GTAG_ID}/Mw3sCIT5rokcEM2Cgbk_',
-                  'value': 1.0,
-                  'currency': 'JPY',
-                  'event_callback': callback
-                });
+            try {
+              var params = new URLSearchParams(window.location.search);
+              var isPreview = params.get('gtag_preview') === '1' || ${process.env.NODE_ENV === "development" ? "true" : "false"};
+              if (params.get('gtag_preview') === '1') {
+                localStorage.setItem('gtag_preview', 'true');
               }
-              return false;
-            }
-            function gtag_report_conversion_ueno(url) {
-              var callback = function () {
-                if (typeof(url) != 'undefined') {
-                  window.location = url;
+              var gclid = params.get('gclid');
+              var wbraid = params.get('wbraid');
+              var gbraid = params.get('gbraid');
+              if (isPreview) {
+                console.log('[ABODY GTAG Preview] layout: URL params checked', { gclid: gclid, wbraid: wbraid, gbraid: gbraid });
+              }
+              if (gclid || wbraid || gbraid) {
+                localStorage.setItem('google_ads_visitor', 'true');
+                if (isPreview) {
+                  console.log('[ABODY GTAG Preview] layout: google_ads_visitor = true');
                 }
-              };
-              gtag('event','conversion',{
-                'send_to':'${GTAG_ID}/Mw3sCIT5rokcEM2Cgbk_',
-                'value':1.0,
-                'currency':'JPY',
-                'event_callback':callback
-              });
-              return false;
-            }
-            function gtag_report_conversion_sakuragicho(url) {
-              var callback = function () {
-                if (typeof(url) != 'undefined') {
-                  window.location = url;
-                }
-              };
-              gtag('event','conversion',{
-                'send_to':'${GTAG_ID}/QxeECNPHwYkcEM2Cgbk_',
-                'value':1.0,
-                'currency':'JPY',
-                'event_callback':callback
-              });
-              return false;
-            }
+              } else if (isPreview) {
+                console.log('[ABODY GTAG Preview] layout: google_ads_visitor 未設定');
+              }
+            } catch (e) {}
           `}
         </Script>
+        <GoogleAdsVisitorTracker />
         <LPTopCampaignBar />
         <div className="page-shell abody-bg min-h-screen w-full flex justify-center">
           <div className="page-panel abody-card relative z-10 w-full md:max-w-[980px] md:shadow-xl md:rounded-2xl overflow-hidden bg-white md:bg-transparent">

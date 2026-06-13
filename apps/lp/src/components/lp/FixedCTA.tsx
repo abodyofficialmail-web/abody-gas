@@ -1,6 +1,7 @@
 "use client";
 
 import { LINE_URL } from "@/lib/constants";
+import { navigateToLine } from "@/lib/googleAdsTracking";
 
 export function LPFixedCTA() {
   return (
@@ -9,13 +10,7 @@ export function LPFixedCTA() {
         href={LINE_URL}
         onClick={(e) => {
           e.preventDefault();
-          const w = window as unknown as { gtag_report_conversion?: (u: string) => boolean };
-          if (w.gtag_report_conversion) {
-            w.gtag_report_conversion(LINE_URL);
-          } else {
-            window.location.href = LINE_URL;
-          }
-          return false;
+          navigateToLine(LINE_URL);
         }}
         className="block w-full py-3 text-sm rounded-2xl bg-abody-orange text-white font-semibold text-center shadow-soft hover:bg-abody-orange-dark transition-colors"
         aria-label="LINEで初回体験を予約"

@@ -3,6 +3,7 @@
 import { useEffect } from "react";
 import { createPortal } from "react-dom";
 import { LINE_URL_BY_STORE } from "@/lib/constants";
+import { navigateToStoreLine } from "@/lib/googleAdsTracking";
 import { X } from "lucide-react";
 
 function LineLinkModal({ storeId, url, className, children }: { storeId: string; url: string; className: string; children: React.ReactNode }) {
@@ -11,13 +12,7 @@ function LineLinkModal({ storeId, url, className, children }: { storeId: string;
       href={url}
       onClick={(e) => {
         e.preventDefault();
-        const w = window as unknown as { gtag_report_conversion?: (u: string) => boolean };
-        if (w.gtag_report_conversion) {
-          w.gtag_report_conversion(url);
-        } else {
-          window.location.href = url;
-        }
-        return false;
+        navigateToStoreLine(storeId, url);
       }}
       className={className}
       data-store-id={storeId}

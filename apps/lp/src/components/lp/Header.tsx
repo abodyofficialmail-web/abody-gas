@@ -3,26 +3,26 @@
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
 import Link from "next/link";
-import { LINE_URL } from "@/lib/constants";
+import { LINE_URL, LINE_URL_BY_STORE } from "@/lib/constants";
+import { navigateToStoreLine } from "@/lib/googleAdsTracking";
 
 const STORES = [
   { id: "ebisu", name: "恵比寿店" },
   { id: "ueno", name: "上野店" },
   { id: "sakuragicho", name: "桜木町店" },
   { id: "shinjuku", name: "新宿店" },
+  { id: "fukuoka", name: "福岡店" },
 ];
 
 export function LPHeader() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [selectedStore, setSelectedStore] = useState("ebisu");
+  const lineUrl = LINE_URL_BY_STORE[selectedStore] ?? LINE_URL;
+  const hasLineLink = Boolean(LINE_URL_BY_STORE[selectedStore]);
 
-  const handleLineClick = (url: string) => {
-    const w = window as unknown as { gtag_report_conversion?: (u: string) => boolean };
-    if (w.gtag_report_conversion) {
-      w.gtag_report_conversion(url);
-    } else {
-      window.location.href = url;
-    }
+  const handleLineClick = () => {
+    if (!hasLineLink) return;
+    navigateToStoreLine(selectedStore, lineUrl);
   };
 
   return (
@@ -41,18 +41,23 @@ export function LPHeader() {
               <option key={s.id} value={s.id}>{s.name}</option>
             ))}
           </select>
-          <a
-            href={LINE_URL}
-            onClick={(e) => {
-              e.preventDefault();
-              handleLineClick(LINE_URL);
-              return false;
-            }}
-            className="text-sm font-medium px-4 py-2 rounded-2xl bg-abody-teal text-white shadow-soft hover:bg-abody-teal-dark transition-colors"
-            aria-label="LINEで無料体験を予約"
-          >
-            体験無料
-          </a>
+          {hasLineLink ? (
+            <a
+              href={lineUrl}
+              onClick={(e) => {
+                e.preventDefault();
+                handleLineClick();
+              }}
+              className="text-sm font-medium px-4 py-2 rounded-2xl bg-abody-teal text-white shadow-soft hover:bg-abody-teal-dark transition-colors"
+              aria-label="LINEで無料体験を予約"
+            >
+              体験無料
+            </a>
+          ) : (
+            <span className="text-sm font-medium px-4 py-2 rounded-2xl bg-neutral-100 text-neutral-400">
+              準備中
+            </span>
+          )}
         </nav>
         <button type="button" className="md:hidden p-2 text-neutral-600" onClick={() => setMobileMenuOpen(!mobileMenuOpen)} aria-label="メニュー">
           {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
@@ -67,19 +72,25 @@ export function LPHeader() {
                 {s.name}
               </button>
             ))}
-            <a
-              href={LINE_URL}
-              onClick={(e) => {
-                e.preventDefault();
-                setMobileMenuOpen(false);
-                handleLineClick(LINE_URL);
-                return false;
-              }}
-              className="block mt-4 text-center py-3 rounded-2xl bg-abody-teal text-white font-medium"
-              aria-label="LINEで無料体験を予約"
-            >
-              体験無料
-            </a>
+            {hasLineLink ? (
+              <a
+                href={lineUrl}
+                onClick={(e) => {
+                  e.preventDefault();
+                  setMobileMenuOpen(false);
+                  handleLineClick();
+                  return false;
+                }}
+                className="block mt-4 text-center py-3 rounded-2xl bg-abody-teal text-white font-medium"
+                aria-label="LINEで無料体験を予約"
+              >
+                体験無料
+              </a>
+            ) : (
+              <p className="block mt-4 text-center py-3 rounded-2xl bg-neutral-100 text-neutral-400 font-medium">
+                公式LINEは準備中です
+              </p>
+            )}
           </div>
         </div>
       )}

@@ -86,6 +86,9 @@ export default function RecruitPage() {
                 <li>
                   新宿店：東京都新宿区西新宿7-22-39
                 </li>
+                <li>
+                  福岡店：福岡市中央区大名2-11-15 Shin-Akasakamon 3F
+                </li>
               </ul>
             </Section>
 

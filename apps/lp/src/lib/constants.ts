@@ -3,7 +3,7 @@ export const LINE_URL_EBISU = "https://lin.ee/Lt7TNZd";
 export const LINE_URL_UENO = "https://lin.ee/j02i6sq";
 export const LINE_URL_SAKURAGICHO = "https://lin.ee/X2nEVKr";
 export const LINE_URL_SHINJUKU =
-  process.env.NEXT_PUBLIC_LINE_URL_SHINJUKU || LINE_URL_EBISU;
+  process.env.NEXT_PUBLIC_LINE_URL_SHINJUKU || "https://lin.ee/67ezcOd";
 
 /** 店舗ID → LINE予約URL */
 export const LINE_URL_BY_STORE: Record<string, string> = {

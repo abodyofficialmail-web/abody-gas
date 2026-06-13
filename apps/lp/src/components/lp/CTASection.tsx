@@ -1,18 +1,24 @@
 "use client";
 import { LINE_URL_BY_STORE } from "@/lib/constants";
+import { navigateToStoreLine } from "@/lib/googleAdsTracking";
 
-const REMAINING_SLOTS: Record<string, number> = {
-  ebisu: 5,
-  ueno: 5,
-  sakuragicho: 5,
-  shinjuku: 5,
+/** プレオープンキャンペーンは新宿店のみ */
+const SHINJUKU_CAMPAIGN_SLOTS = 3;
+
+const REMAINING_SLOTS: Record<string, number | null> = {
+  ebisu: null,
+  ueno: null,
+  sakuragicho: null,
+  shinjuku: SHINJUKU_CAMPAIGN_SLOTS,
+  fukuoka: null,
 };
 
 const STORES = [
-  { id: "ebisu", name: "恵比寿店", buttonClass: "bg-blue-600 focus-visible:ring-blue-500 hover:bg-blue-700 text-white" },
-  { id: "ueno", name: "上野店", buttonClass: "bg-green-600 focus-visible:ring-green-500 hover:bg-green-700 text-white" },
-  { id: "sakuragicho", name: "桜木町店", buttonClass: "bg-amber-500 focus-visible:ring-amber-400 hover:bg-amber-600 text-neutral-900" },
-  { id: "shinjuku", name: "新宿店", buttonClass: "bg-purple-600 focus-visible:ring-purple-500 hover:bg-purple-700 text-white" },
+  { id: "ebisu", name: "恵比寿店", buttonClass: "bg-blue-600 focus-visible:ring-blue-500 hover:bg-blue-700 text-white", hasLineLink: true },
+  { id: "ueno", name: "上野店", buttonClass: "bg-green-600 focus-visible:ring-green-500 hover:bg-green-700 text-white", hasLineLink: true },
+  { id: "sakuragicho", name: "桜木町店", buttonClass: "bg-amber-500 focus-visible:ring-amber-400 hover:bg-amber-600 text-neutral-900", hasLineLink: true },
+  { id: "shinjuku", name: "新宿店", buttonClass: "bg-purple-600 focus-visible:ring-purple-500 hover:bg-purple-700 text-white", hasLineLink: true },
+  { id: "fukuoka", name: "福岡店", buttonClass: "bg-rose-500 focus-visible:ring-rose-400 hover:bg-rose-600 text-white", hasLineLink: false },
 ] as const;
 
 function LineButton({
@@ -31,13 +37,7 @@ function LineButton({
       href={url}
       onClick={(e) => {
         e.preventDefault();
-        const w = window as unknown as { gtag_report_conversion?: (u: string) => boolean };
-        if (w.gtag_report_conversion) {
-          w.gtag_report_conversion(url);
-        } else {
-          window.location.href = url;
-        }
-        return false;
+        navigateToStoreLine(storeId, url);
       }}
       className={className}
       data-store-id={storeId}
@@ -79,16 +79,28 @@ export function LPCTASection() {
           <div className="mt-5 grid grid-cols-1 sm:grid-cols-2 gap-3">
             {STORES.map((store) => (
               <div key={store.id} className="flex flex-col items-center gap-2">
-                <LineButton
-                  storeId={store.id}
-                  url={LINE_URL_BY_STORE[store.id] ?? LINE_URL_BY_STORE.ebisu}
-                  className={`w-full h-14 md:h-16 flex items-center justify-center rounded-xl font-semibold text-base shadow-md hover:shadow-lg focus-visible:ring-2 focus-visible:ring-offset-2 transition-all px-4 text-center ${store.buttonClass}`}
-                >
-                  {store.name}の無料体験を予約
-                </LineButton>
-                <p className="text-xs text-neutral-500">
-                  キャンペーン残り枠：残り{REMAINING_SLOTS[store.id] ?? 0}名
-                </p>
+                {store.hasLineLink ? (
+                  <LineButton
+                    storeId={store.id}
+                    url={LINE_URL_BY_STORE[store.id] ?? LINE_URL_BY_STORE.ebisu}
+                    className={`w-full h-14 md:h-16 flex items-center justify-center rounded-xl font-semibold text-base shadow-md hover:shadow-lg focus-visible:ring-2 focus-visible:ring-offset-2 transition-all px-4 text-center ${store.buttonClass}`}
+                  >
+                    {store.name}の無料体験を予約
+                  </LineButton>
+                ) : (
+                  <span className="w-full h-14 md:h-16 flex items-center justify-center rounded-xl font-semibold text-base px-4 text-center bg-neutral-100 text-neutral-400">
+                    {store.name}（準備中）
+                  </span>
+                )}
+                {REMAINING_SLOTS[store.id] != null ? (
+                  <p className="text-xs font-medium text-purple-700">
+                    プレオープンCP 残り{REMAINING_SLOTS[store.id]}枠（新宿店のみ）
+                  </p>
+                ) : store.hasLineLink ? (
+                  <p className="text-xs text-neutral-400">※キャンペーン対象外</p>
+                ) : (
+                  <p className="text-xs text-neutral-400">公式LINEは準備中です</p>
+                )}
               </div>
             ))}
           </div>
