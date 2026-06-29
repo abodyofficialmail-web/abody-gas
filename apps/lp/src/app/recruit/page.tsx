@@ -55,9 +55,14 @@ export default function RecruitPage() {
 
             <Section title="募集内容">
               <div className="space-y-2">
-                <p>
-                  <span className="font-bold text-neutral-900">募集職種：</span>インストラクター（スポーツトレーナー）
-                </p>
+                <p className="font-bold text-neutral-900">募集職種</p>
+                <ul className="list-disc pl-6 space-y-2">
+                  <li>インストラクター（スポーツトレーナー）</li>
+                  <li>
+                    ピラティスインストラクター
+                    <span className="text-neutral-600">（上野店・桜木町店・新宿店のみ募集）</span>
+                  </li>
+                </ul>
                 <p className="font-bold text-neutral-900">仕事内容</p>
                 <ul className="list-disc pl-6 space-y-2">
                   <li>初心者向けパーソナルトレーニング指導</li>
