@@ -1,19 +1,18 @@
 "use client";
 
-import { ShinjukuLineLink } from "@/components/lp/ShinjukuLineLink";
+import { CAMPAIGN_BAR_TEXT } from "@/lib/campaign";
 
-/** 常に表示するキャンペーンバナー（新宿店プレオープンのみ） */
+/** 常に表示するキャンペーンバナー */
 export function LPTopCampaignBar() {
   return (
     <div className="sticky top-0 left-0 right-0 z-[100] bg-abody-teal text-white shadow-md">
-      <ShinjukuLineLink
+      <a
+        href="#campaign"
         className="block w-full py-2.5 px-4 text-center hover:bg-abody-teal-dark transition-colors"
-        aria-label="新宿店プレオープンキャンペーンを見る"
+        aria-label="夏の特別キャンペーンを見る"
       >
-        <span className="text-sm sm:text-base font-bold">
-          【新宿店のみ】プレオープンCP｜残り3枠｜初月980円｜入会金・初回体験0円
-        </span>
-      </ShinjukuLineLink>
+        <span className="text-sm sm:text-base font-bold">{CAMPAIGN_BAR_TEXT}</span>
+      </a>
     </div>
   );
 }
