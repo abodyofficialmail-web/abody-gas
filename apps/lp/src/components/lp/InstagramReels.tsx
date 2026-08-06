@@ -31,6 +31,7 @@ function ReelCard({ reel, idx }: { reel: (typeof INSTAGRAM_REELS)[number]; idx: 
             src={thumbnail!}
             alt={`Reel ${idx + 1}`}
             className="absolute inset-0 w-full h-full object-cover"
+            referrerPolicy="no-referrer"
             onError={() => setImgError(true)}
           />
           <div className="absolute inset-0 flex items-center justify-center bg-black/20 group-hover:bg-black/30 transition-colors">
