@@ -48,7 +48,7 @@ export function LPCampaign() {
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
         <div className="bg-white rounded-2xl overflow-hidden shadow-soft border border-abody-teal/20">
           <div className="flex justify-center items-center w-full bg-neutral-100">
-            <div className="relative w-full max-w-[720px] aspect-[1024/682] mx-auto">
+            <div className="relative w-full max-w-[720px] aspect-[1024/535] mx-auto">
               <Image
                 src={CAMPAIGN_IMAGE}
                 alt={CAMPAIGN_IMAGE_ALT}

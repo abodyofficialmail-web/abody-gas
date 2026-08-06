@@ -5,17 +5,17 @@ export const CAMPAIGN_IMAGE_ALT =
 
 export const CAMPAIGN_TITLE = "夏の特別キャンペーン";
 export const CAMPAIGN_SUBTITLE = "今年こそ、理想のカラダを手に入れるチャンス！";
-export const CAMPAIGN_PERIOD = "7.4（土）〜 7.19（日）";
-export const CAMPAIGN_LIMIT = "先着20名様限定";
+export const CAMPAIGN_PERIOD = "8.1（土）〜 8.23（日）";
+export const CAMPAIGN_LIMIT = "先着5名様限定";
 export const CAMPAIGN_FIRST_MONTH_ORIGINAL = "30,800円";
 export const CAMPAIGN_FIRST_MONTH_PRICE = "9,800円";
 
 export const CAMPAIGN_REMAINING_SLOTS: Record<string, number> = {
-  ebisu: 4,
-  ueno: 8,
-  sakuragicho: 9,
-  shinjuku: 8,
-  fukuoka: 7,
+  shinjuku: 4,
+  ueno: 3,
+  sakuragicho: 3,
+  ebisu: 2,
+  fukuoka: 3,
 };
 
 export const CAMPAIGN_STORES = [
@@ -52,4 +52,4 @@ export const CAMPAIGN_STORES = [
 ] as const;
 
 export const CAMPAIGN_BAR_TEXT =
-  "【夏の特別CP】初月9,800円｜体験・入会金無料｜7/4〜7/19";
+  "【夏の特別CP】初月9,800円｜体験・入会金無料｜8/1〜8/23";
