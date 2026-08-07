@@ -1,8 +1,6 @@
 "use client";
 
 import Image from "next/image";
-import { LINE_URL_BY_STORE } from "@/lib/constants";
-import { navigateToStoreLine } from "@/lib/googleAdsTracking";
 import {
   CAMPAIGN_FIRST_MONTH_ORIGINAL,
   CAMPAIGN_FIRST_MONTH_PRICE,
@@ -10,37 +8,9 @@ import {
   CAMPAIGN_IMAGE_ALT,
   CAMPAIGN_LIMIT,
   CAMPAIGN_PERIOD,
-  CAMPAIGN_REMAINING_SLOTS,
-  CAMPAIGN_STORES,
   CAMPAIGN_SUBTITLE,
   CAMPAIGN_TITLE,
 } from "@/lib/campaign";
-
-function StoreLineButton({
-  storeId,
-  url,
-  className,
-  children,
-}: {
-  storeId: string;
-  url: string;
-  className: string;
-  children: React.ReactNode;
-}) {
-  return (
-    <a
-      href={url}
-      onClick={(e) => {
-        e.preventDefault();
-        navigateToStoreLine(storeId, url);
-      }}
-      className={className}
-      data-store-id={storeId}
-    >
-      {children}
-    </a>
-  );
-}
 
 export function LPCampaign() {
   return (
@@ -91,23 +61,6 @@ export function LPCampaign() {
               <p className="text-neutral-600 text-xs sm:text-sm">
                 ※先着順のため定員に達し次第終了となります。残り枠は店舗により異なります。
               </p>
-            </div>
-
-            <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-3 max-w-lg mx-auto">
-              {CAMPAIGN_STORES.map((store) => (
-                <div key={store.id} className="flex flex-col gap-1">
-                  <StoreLineButton
-                    storeId={store.id}
-                    url={LINE_URL_BY_STORE[store.id] ?? "#"}
-                    className={`w-full py-3 rounded-2xl font-semibold text-sm transition-colors focus-visible:ring-2 focus-visible:ring-offset-2 ${store.buttonClass}`}
-                  >
-                    {store.name}で予約する
-                  </StoreLineButton>
-                  <p className="text-xs text-neutral-500">
-                    残り{CAMPAIGN_REMAINING_SLOTS[store.id]}名
-                  </p>
-                </div>
-              ))}
             </div>
           </div>
         </div>
