@@ -3,7 +3,7 @@ export const LINE_URL = process.env.NEXT_PUBLIC_LINE_URL || "#campaign";
 
 export const LINE_URL_UENO = process.env.NEXT_PUBLIC_LINE_URL_UENO || LINE_URL;
 export const LINE_URL_SHINJUKU =
-  process.env.NEXT_PUBLIC_LINE_URL_SHINJUKU || LINE_URL;
+  process.env.NEXT_PUBLIC_LINE_URL_SHINJUKU || "https://lin.ee/yuANKps";
 
 export const LINE_URL_BY_STORE: Record<string, string> = {
   ueno: LINE_URL_UENO,
