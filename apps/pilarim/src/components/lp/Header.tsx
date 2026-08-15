@@ -4,6 +4,7 @@ import { useState } from "react";
 import { Menu, X } from "lucide-react";
 import Link from "next/link";
 import { LINE_URL } from "@/lib/constants";
+import { PilarimLogo } from "@/components/lp/PilarimLogo";
 
 export function LPHeader() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -12,8 +13,8 @@ export function LPHeader() {
   return (
     <header className="sticky top-0 z-50 bg-white/95 backdrop-blur border-b border-neutral-100">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 flex items-center justify-between h-14 sm:h-16">
-        <Link href="/" className="text-base font-semibold tracking-[0.18em] text-pilarim-ink">
-          PILARIM
+        <Link href="/" className="flex items-center" aria-label="PILARIM トップ">
+          <PilarimLogo className="h-10 sm:h-12 w-auto" priority />
         </Link>
         <nav className="hidden md:flex items-center gap-6">
           {hasLineLink ? (

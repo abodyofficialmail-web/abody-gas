@@ -1,14 +1,9 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1024" height="535" viewBox="0 0 1024 535" role="img" aria-labelledby="title">
-  <title id="title">PILARIM ªü×Ëó°­ãóÚüó</title>
-  <defs>
-    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%" stop-color="#1c1917"/>
-      <stop offset="100%" stop-color="#3f2e1e"/>
-    </linearGradient>
-  </defs>
-  <rect width="1024" height="535" fill="url(#bg)"/>
-  <text x="80" y="150" fill="#d4b48a" font-size="28" font-family="Georgia, serif" letter-spacing="6">PILARIM OPENING CAMPAIGN</text>
-  <text x="80" y="250" fill="#f7f3ee" font-size="64" font-weight="700" font-family="sans-serif"> 9,800†</text>
-  <text x="80" y="330" fill="#f7f3ee" font-size="32" font-family="sans-serif">SÈìüËó°ûeÑ !™</text>
-  <text x="80" y="420" fill="#d4b48a" font-size="24" font-family="sans-serif">×Q>LÔéÆ£¹  Ñü½Êë</text>
+  <title id="title">PILARIM opening campaign</title>
+  <rect width="1024" height="535" fill="#9AA6B2"/>
+  <text x="512" y="150" text-anchor="middle" fill="#ffffff" font-family="Helvetica Neue, Arial, sans-serif" font-size="42" font-weight="500" letter-spacing="10">PILAR?M</text>
+  <text x="512" y="190" text-anchor="middle" fill="#ffffff" font-family="Helvetica Neue, Arial, sans-serif" font-size="14" letter-spacing="3">pilates studio  x  personal training</text>
+  <text x="512" y="280" text-anchor="middle" fill="#ffffff" font-family="Helvetica Neue, Arial, sans-serif" font-size="28" letter-spacing="4">OPENING CAMPAIGN</text>
+  <text x="512" y="360" text-anchor="middle" fill="#ffffff" font-family="Helvetica Neue, Arial, sans-serif" font-size="56" font-weight="700">First month 9,800</text>
+  <text x="512" y="420" text-anchor="middle" fill="#ffffff" font-family="Helvetica Neue, Arial, sans-serif" font-size="22" letter-spacing="2">trial and enrollment fee free</text>
 </svg>

@@ -11,12 +11,13 @@ const config: Config = {
     extend: {
       colors: {
         pilarim: {
-          bronze: "#9a6b3d",
-          "bronze-dark": "#7c5630",
-          ink: "#1c1917",
-          cream: "#f7f3ee",
-          accent: "#c45c26",
-          "accent-dark": "#9a4519",
+          bronze: "#7A8794",
+          "bronze-dark": "#5A6570",
+          ink: "#2C3338",
+          cream: "#F4F6F8",
+          accent: "#5A6570",
+          "accent-dark": "#3D454C",
+          steel: "#9AA6B2",
         },
       },
       fontFamily: {

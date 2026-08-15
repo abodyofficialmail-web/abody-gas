@@ -14,7 +14,7 @@ export function LPLocations() {
         <div className="grid grid-cols-1 md:grid-cols-1 gap-6 max-w-xl mx-auto">
           <div
             className="bg-white rounded-2xl p-6 shadow-soft border-2"
-            style={{ borderColor: "#9a6b3d" }}
+            style={{ borderColor: "#9AA6B2" }}
           >
             <h3 className="text-sm font-semibold text-neutral-900 mb-2">{STUDIO.name}</h3>
             <span className="inline-block text-xs font-medium text-pilarim-bronze bg-pilarim-bronze/10 rounded-full px-3 py-1 mb-3">

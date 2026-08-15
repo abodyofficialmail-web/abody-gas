@@ -22,9 +22,12 @@ const siteOrigin = process.env.NEXT_PUBLIC_SITE_URL || "https://pilarim.vercel.a
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteOrigin),
-  title: "PILARIM｜受け放題ピラティス＆パーソナル - 姿勢が整えば、体は変わる。",
+  title: "PILARIM｜pilates studio x personal training",
   description:
     "30代〜50代男性向け。受け放題のマシンピラティスとパーソナルトレーニングで、姿勢改善・運動習慣・機能的なダイエットを両立するスタジオ。",
+  icons: {
+    icon: "/favicon.svg",
+  },
 };
 
 export const viewport: Viewport = {

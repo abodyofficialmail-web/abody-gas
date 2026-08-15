@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="500" viewBox="0 0 800 500" role="img" aria-labelledby="logoTitle">
+  <title id="logoTitle">PILARIM pilates studio x personal training</title>
+  <rect width="800" height="500" fill="#9AA6B2"/>
+  <text x="400" y="214" text-anchor="middle" fill="#ffffff" font-family="Helvetica Neue, Arial, sans-serif" font-size="72" font-weight="500" letter-spacing="10">PILAR0M</text>
+  <line x1="70" y1="318" x2="210" y2="318" stroke="#ffffff" stroke-width="1.2"/>
+  <line x1="590" y1="318" x2="730" y2="318" stroke="#ffffff" stroke-width="1.2"/>
+  <text x="400" y="292" text-anchor="middle" fill="#ffffff" font-family="Helvetica Neue, Arial, sans-serif" font-size="18" font-weight="400" letter-spacing="3">pilates studio</text>
+  <text x="400" y="324" text-anchor="middle" fill="#ffffff" font-family="Helvetica Neue, Arial, sans-serif" font-size="16" font-weight="400">x</text>
+  <text x="400" y="356" text-anchor="middle" fill="#ffffff" font-family="Helvetica Neue, Arial, sans-serif" font-size="18" font-weight="400" letter-spacing="3">personal training</text>
+</svg>
