@@ -1,26 +1,6 @@
-export function LPOptions() {
-  const OPTIONS = [
-    {
-      name: "60分受け放題",
-      price: "+25,000",
-      unit: "円",
-      description:
-        "30分では物足りない方や、ピラティス30分＋パーソナル30分など、オリジナルにカスタマイズできます",
-    },
-    {
-      name: "着替えレンタル",
-      price: "3,300",
-      unit: "円",
-      description: "仕事の前後に手ぶらで通いたい方向けです",
-    },
-    {
-      name: "食事パーソナル",
-      price: "9,800",
-      unit: "円",
-      description: "機能を落とさず引き締める食事の組み立て。※効果が実感できなかったら返金保証付き",
-    },
-  ];
+import { TICKET_PLANS } from "@/lib/plans";
 
+export function LPOptions() {
   return (
     <section className="py-14 sm:py-16 bg-neutral-50">
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
@@ -30,24 +10,34 @@ export function LPOptions() {
         <p className="text-center text-neutral-500 text-xs sm:text-sm mb-6">
           こちらは任意で必ずご利用いただく必要や営業はございません
         </p>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {OPTIONS.map((item) => (
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {TICKET_PLANS.map((item) => (
             <div
               key={item.name}
               className="bg-white rounded-2xl p-6 shadow-soft border border-neutral-100 min-w-0"
             >
-              <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 mb-2">
-                <p className="text-neutral-900 font-semibold text-sm sm:text-base">{item.name}</p>
-                {item.price && (
-                  <p className="text-pilarim-bronze font-bold text-base sm:text-lg shrink-0">
-                    {item.price}
-                    {item.unit && <span className="font-medium text-neutral-600 ml-1">{item.unit}</span>}
-                  </p>
-                )}
+              <p className="text-xs text-neutral-400 font-shippori">{item.nameEn}</p>
+              <p className="text-neutral-900 font-semibold text-sm sm:text-base mt-0.5">
+                {item.name}
+              </p>
+              <p className="text-neutral-600 text-xs sm:text-sm leading-relaxed mt-3">
+                {item.description}
+              </p>
+              <div className="mt-5 grid grid-cols-2 gap-3">
+                {item.prices.map((price) => (
+                  <div key={price.label} className="bg-pilarim-cream rounded-xl px-3 py-3">
+                    <p className="text-xs text-neutral-500">{price.label}</p>
+                    <p className="font-shippori text-xl font-semibold text-[#8B3A3A] mt-1">
+                      {price.value}
+                      <span className="text-xs font-medium text-neutral-500 ml-1">円</span>
+                    </p>
+                    <p className="text-[10px] text-[#8B3A3A]">税抜</p>
+                    {price.note && (
+                      <p className="text-[10px] font-bold text-[#8B3A3A] mt-1">{price.note}</p>
+                    )}
+                  </div>
+                ))}
               </div>
-              {item.description && (
-                <p className="text-neutral-600 text-xs sm:text-sm leading-relaxed">{item.description}</p>
-              )}
             </div>
           ))}
         </div>

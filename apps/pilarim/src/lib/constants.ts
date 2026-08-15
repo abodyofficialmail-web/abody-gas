@@ -1,6 +1,15 @@
 /** 体験予約用LINE（未設定時はキャンペーンセクションへ誘導） */
 export const LINE_URL = process.env.NEXT_PUBLIC_LINE_URL || "#campaign";
 
+export const LINE_URL_UENO = process.env.NEXT_PUBLIC_LINE_URL_UENO || LINE_URL;
+export const LINE_URL_SHINJUKU =
+  process.env.NEXT_PUBLIC_LINE_URL_SHINJUKU || LINE_URL;
+
+export const LINE_URL_BY_STORE: Record<string, string> = {
+  ueno: LINE_URL_UENO,
+  shinjuku: LINE_URL_SHINJUKU,
+};
+
 /** 採用用LINE */
 export const LINE_URL_RECRUIT =
   process.env.NEXT_PUBLIC_LINE_URL_RECRUIT || LINE_URL;
@@ -8,15 +17,32 @@ export const LINE_URL_RECRUIT =
 export const SITE_URL =
   process.env.NEXT_PUBLIC_SITE_URL || "https://pilarim.vercel.app";
 
-export const STUDIO = {
-  id: "pilarim",
-  name: "PILARIM",
-  address: "体験予約時にアクセスをご案内します",
-  access: "駅近・通いやすい立地",
-  hours: "9:00〜22:00",
-  feature: "マシンピラティス＋パーソナル受け放題",
-  mapUrl: "",
-};
+export const STORES = [
+  {
+    id: "ueno",
+    name: "上野店",
+    address: "東京都台東区台東4-31-5オリオンビル4F",
+    access: "上野駅 徒歩3分",
+    hours: "9:00〜22:00",
+    feature: "ピラティス受け放題（1回30分）＋パーソナル",
+    pilates: true,
+    borderColor: "#22c55e",
+    mapUrl: "https://www.google.com/maps/search/?api=1&query=東京都台東区台東4-31-5",
+  },
+  {
+    id: "shinjuku",
+    name: "新宿店",
+    address: "東京都新宿区西新宿7-22-39",
+    access: "新宿駅 徒歩5分",
+    hours: "9:00〜22:00",
+    feature: "マンツーマンパーソナル 月額25,000円（税別）",
+    pilates: false,
+    borderColor: "#a855f7",
+    mapUrl: "https://www.google.com/maps/search/?api=1&query=東京都新宿区西新宿7-22-39",
+  },
+] as const;
+
+export type StoreId = (typeof STORES)[number]["id"];
 
 /** トレーニング風景（Instagram Reel）。URLを追加するとサムネイル表示されます */
 export const INSTAGRAM_REELS: { url: string; thumbnail?: string }[] = [];
