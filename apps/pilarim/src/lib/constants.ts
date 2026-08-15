@@ -14,6 +14,7 @@ export const LINE_URL_BY_STORE: Record<string, string> = {
 export const LINE_URL_RECRUIT =
   process.env.NEXT_PUBLIC_LINE_URL_RECRUIT || LINE_URL;
 
+/** 公開オリジン。Abody 配下のドメインは使わない */
 export const SITE_URL =
   process.env.NEXT_PUBLIC_SITE_URL || "https://pilarim.vercel.app";
 

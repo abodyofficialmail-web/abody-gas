@@ -25,6 +25,9 @@ export const metadata: Metadata = {
   title: "PILARIM｜pilates studio x personal training",
   description:
     "30代〜50代男性向け。受け放題のマシンピラティスとパーソナルトレーニングで、姿勢改善・運動習慣・機能的なダイエットを両立するスタジオ。",
+  alternates: {
+    canonical: siteOrigin,
+  },
   icons: {
     icon: "/favicon.svg",
   },
