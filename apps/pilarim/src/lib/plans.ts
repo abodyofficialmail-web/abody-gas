@@ -56,9 +56,14 @@ export const SHINJUKU_PLAN = {
   name: "マンツーマン",
   nameEn: "personal training",
   summary: "マンツーマンパーソナルトレーニング",
-  description: "新宿店はマンツーマンのパーソナルトレーニング専門。",
+  description: "新宿店のマンツーマンパーソナル。",
   monthly: "25,000",
 };
+
+/** 新宿店：マンツーマン25,000円に加え、上野店と同じ上位3プラン */
+export const SHINJUKU_PLANS: MembershipPlan[] = UENO_PLANS.filter(
+  (plan) => plan.id !== "basic"
+);
 
 export const TICKET_PLANS = [
   {

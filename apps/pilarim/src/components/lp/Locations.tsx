@@ -21,15 +21,11 @@ export function LPLocations() {
                 style={{ borderColor: store.borderColor }}
               >
                 <h3 className="text-sm font-semibold text-neutral-900 mb-2">{store.name}</h3>
-                {store.pilates ? (
-                  <span className="inline-block text-xs font-medium text-pilarim-bronze bg-pilarim-bronze/10 rounded-full px-3 py-1 mb-3">
-                    ピラティス受け放題（1回30分）
-                  </span>
-                ) : (
-                  <span className="inline-block text-xs font-medium text-pilarim-bronze bg-pilarim-bronze/10 rounded-full px-3 py-1 mb-3">
-                    マンツーマン 月額25,000円（税別）
-                  </span>
-                )}
+                <span className="inline-block text-xs font-medium text-pilarim-bronze bg-pilarim-bronze/10 rounded-full px-3 py-1 mb-3">
+                  {store.id === "ueno"
+                    ? "ピラティス受け放題（1回30分）"
+                    : "マンツーマン／ピラティス受け放題プランあり"}
+                </span>
                 <div className="space-y-2 text-neutral-600 text-sm sm:text-base">
                   <div className="flex gap-2">
                     <MapPin className="w-4 h-4 mt-0.5 shrink-0 text-pilarim-bronze" />
