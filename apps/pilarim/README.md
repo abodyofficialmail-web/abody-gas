@@ -42,7 +42,7 @@ GitHub のリポジトリ（`abody-gas`）はそのままで大丈夫です。
 5. **Environment Variables** を追加する
    - `NEXT_PUBLIC_SITE_URL` = `https://pilarim.vercel.app`
    - `NEXT_PUBLIC_LINE_URL_SHINJUKU` = `https://lin.ee/yuANKps`
-   - 上野店 LINE が分かっていれば `NEXT_PUBLIC_LINE_URL_UENO` も追加
+   - `NEXT_PUBLIC_LINE_URL_UENO` = `https://lin.ee/sxUMXxh`
 6. **Deploy** を押す
 7. 完了後、**Settings → Domains** で `pilarim.vercel.app` になっていることを確認する
 
