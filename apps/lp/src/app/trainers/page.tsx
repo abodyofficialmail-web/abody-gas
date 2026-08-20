@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import Link from "next/link";
 import { LPHeader } from "@/components/lp/Header";
 import { LPFixedCTA } from "@/components/lp/FixedCTA";
@@ -28,17 +27,6 @@ export default function TrainersPage() {
               <br className="hidden sm:block" />
               自分に合う担当と、無理なく続く通い方を一緒に見つけましょう。
             </p>
-          </div>
-
-          <div className="relative w-full aspect-[16/9] sm:aspect-[21/9] rounded-2xl overflow-hidden bg-neutral-100 mb-10 shadow-soft">
-            <Image
-              src="/trainers/team.png"
-              alt="ABODYのトレーナーたち"
-              fill
-              className="object-cover object-[center_25%]"
-              priority
-              sizes="(max-width: 768px) 100vw, 980px"
-            />
           </div>
 
           <LPTrainerList />
