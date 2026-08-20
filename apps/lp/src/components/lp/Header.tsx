@@ -28,9 +28,17 @@ export function LPHeader() {
   return (
     <header className="sticky top-0 z-50 bg-white/95 backdrop-blur border-b border-neutral-100">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 flex items-center justify-between h-14 sm:h-16">
-        <Link href="/" className="text-base font-semibold tracking-tight text-neutral-900">
-          ABODY
-        </Link>
+        <div className="flex items-center gap-5">
+          <Link href="/" className="text-base font-semibold tracking-tight text-neutral-900">
+            ABODY
+          </Link>
+          <Link
+            href="/trainers"
+            className="hidden md:inline text-sm font-medium text-neutral-600 hover:text-abody-teal transition-colors"
+          >
+            トレーナー
+          </Link>
+        </div>
         <nav className="hidden md:flex items-center gap-6">
           <select
             value={selectedStore}
@@ -66,6 +74,13 @@ export function LPHeader() {
       {mobileMenuOpen && (
         <div className="md:hidden border-t border-neutral-100 bg-white py-4 px-4">
           <div className="space-y-2">
+            <Link
+              href="/trainers"
+              onClick={() => setMobileMenuOpen(false)}
+              className="block w-full text-left px-4 py-2 rounded-2xl text-neutral-700 font-medium"
+            >
+              トレーナー紹介
+            </Link>
             <p className="text-xs text-neutral-500 mb-2">店舗を選択</p>
             {STORES.map((s) => (
               <button key={s.id} onClick={() => { setSelectedStore(s.id); setMobileMenuOpen(false); }} className={`block w-full text-left px-4 py-2 rounded-2xl ${selectedStore === s.id ? "bg-abody-teal/10 text-abody-teal font-medium" : "text-neutral-700"}`}>

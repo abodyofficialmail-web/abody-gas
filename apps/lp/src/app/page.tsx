@@ -12,6 +12,7 @@ import { LPOptions } from "@/components/lp/Options";
 import { LPStep } from "@/components/lp/Step";
 import { LPCTASection } from "@/components/lp/CTASection";
 import { LPLocations } from "@/components/lp/Locations";
+import { LPTrainers } from "@/components/lp/Trainers";
 import { LPRecruit } from "@/components/lp/Recruit";
 import { LPFixedCTA } from "@/components/lp/FixedCTA";
 
@@ -34,6 +35,7 @@ export default function Page() {
         <LPCampaign />
         <LPCTASection />
         <LPLocations />
+        <LPTrainers />
         <LPRecruit />
       </main>
       <LPFixedCTA />
