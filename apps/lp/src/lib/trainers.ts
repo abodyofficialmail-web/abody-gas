@@ -32,9 +32,8 @@ export const TRAINERS: Trainer[] = [
     id: "tomoki",
     name: "ともき",
     nameEn: "Tomoki",
-    // 写真を置く場合:
-    // photo: "/trainers/tomoki.jpg",
-    // photos: ["/trainers/tomoki.jpg", "/trainers/tomoki-stage.jpg"],
+    photo: "/trainers/tomoki.jpg",
+    photos: ["/trainers/tomoki.jpg", "/trainers/tomoki-stage.jpg"],
     stores: ["ebisu", "shinjuku"],
     catch: "続けられる形に落とすのが得意",
     strengths: ["初心者の習慣化", "ボディメイク", "フィジーク"],
