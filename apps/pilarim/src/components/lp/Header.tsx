@@ -7,46 +7,33 @@ import { LINE_URL_BY_STORE, STORES } from "@/lib/constants";
 import { CtaButton } from "@/components/lp/CtaButton";
 
 const NAV = [
-  { href: "#why", label: "特徴" },
-  { href: "#program", label: "プログラム" },
-  { href: "#price", label: "料金" },
-  { href: "#faq", label: "FAQ" },
+  { href: "/#why", label: "特徴" },
+  { href: "/#program", label: "プログラム" },
+  { href: "/#price", label: "料金" },
+  { href: "/#faq", label: "よくある質問" },
 ];
 
 export function LPHeader() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [selectedStore, setSelectedStore] = useState<(typeof STORES)[number]["id"]>("ueno");
-  const href = LINE_URL_BY_STORE[selectedStore];
 
   return (
     <header className="sticky top-0 z-50 bg-white/95 backdrop-blur border-b border-neutral-100">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 flex items-center justify-between h-16">
+      <div className="px-4 sm:px-6 flex items-center justify-between h-14 sm:h-16">
         <Link href="/" className="text-lg font-bold tracking-[0.22em] text-pilarim-ink">
           PILARIM
         </Link>
-        <nav className="hidden md:flex items-center gap-5">
+        <nav className="hidden md:flex items-center gap-5 lg:gap-6">
           {NAV.map((item) => (
             <a
               key={item.href}
               href={item.href}
-              className="text-sm text-neutral-600 hover:text-pilarim-ink transition-colors"
+              className="text-[13px] text-neutral-600 hover:text-pilarim-ink transition-colors"
             >
               {item.label}
             </a>
           ))}
-          <select
-            value={selectedStore}
-            onChange={(e) => setSelectedStore(e.target.value as typeof selectedStore)}
-            className="text-sm text-neutral-600 bg-transparent border border-neutral-200 rounded-full px-3 py-1.5"
-          >
-            {STORES.map((s) => (
-              <option key={s.id} value={s.id}>
-                {s.name}
-              </option>
-            ))}
-          </select>
-          <CtaButton href={href} className="text-sm px-5 py-2.5">
-            まずは無料体験
+          <CtaButton href="/#campaign" className="text-sm px-5 py-2.5">
+            まずは無料体験へ
           </CtaButton>
         </nav>
         <button
@@ -77,7 +64,7 @@ export function LPHeader() {
               className="w-full py-3"
               onClick={() => setMobileMenuOpen(false)}
             >
-              {s.name}で無料体験
+              {s.name}で無料体験へ
             </CtaButton>
           ))}
         </div>
