@@ -1,41 +1,34 @@
 import { LPHeader } from "@/components/lp/Header";
 import { LPHero } from "@/components/lp/Hero";
-import { LPInstagramReels } from "@/components/lp/InstagramReels";
-import { LPPrice } from "@/components/lp/Price";
-import { LPCampaign } from "@/components/lp/Campaign";
-import { LPIntroduction } from "@/components/lp/Introduction";
-import { LPLifestyleSection } from "@/components/lp/LifestyleSection";
 import { LPProgram } from "@/components/lp/Program";
-import { LPBeforeAfter } from "@/components/lp/BeforeAfter";
-import { LPReviews } from "@/components/lp/Reviews";
-import { LPOptions } from "@/components/lp/Options";
+import { LPIntroduction } from "@/components/lp/Introduction";
 import { LPStep } from "@/components/lp/Step";
-import { LPCTASection } from "@/components/lp/CTASection";
+import { LPReviews } from "@/components/lp/Reviews";
+import { LPPrice } from "@/components/lp/Price";
+import { LPOptions } from "@/components/lp/Options";
 import { LPLocations } from "@/components/lp/Locations";
-import { LPRecruit } from "@/components/lp/Recruit";
+import { LPFaq } from "@/components/lp/Faq";
+import { LPCTASection } from "@/components/lp/CTASection";
+import { LPFooter } from "@/components/lp/Footer";
 import { LPFixedCTA } from "@/components/lp/FixedCTA";
 
 export default function Page() {
   return (
     <>
       <LPHeader />
-      <main className="pb-56 sm:pb-64">
+      <main className="pb-24 md:pb-0">
         <LPHero />
-        <LPInstagramReels />
-        <LPPrice />
-        <LPCampaign />
-        <LPIntroduction />
         <LPProgram />
-        <LPLifestyleSection />
-        <LPBeforeAfter />
-        <LPReviews />
-        <LPOptions />
+        <LPIntroduction />
         <LPStep />
-        <LPCampaign />
-        <LPCTASection />
+        <LPReviews />
+        <LPPrice />
+        <LPOptions />
         <LPLocations />
-        <LPRecruit />
+        <LPFaq />
+        <LPCTASection />
       </main>
+      <LPFooter />
       <LPFixedCTA />
     </>
   );

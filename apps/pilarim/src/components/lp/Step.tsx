@@ -1,78 +1,42 @@
-import Image from "next/image";
-import { Calendar, MapPin, MessageCircle, Dumbbell, PersonStanding } from "lucide-react";
+import { MessageCircle, ScanLine, PersonStanding, Dumbbell, ClipboardList } from "lucide-react";
 
 const STEPS = [
-  {
-    icon: Calendar,
-    title: "1. 予約",
-    description: "LINEで希望日時をお知らせください。",
-    image:
-      "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?auto=format&fit=crop&w=900&q=80",
-    imageAlt: "スマートフォンで予約する様子",
-  },
-  {
-    icon: MapPin,
-    title: "2. 来店",
-    description: "スタジオへお越しください。手ぶらでも大丈夫です。",
-    image:
-      "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=900&q=80",
-    imageAlt: "スタジオへ来店する様子",
-  },
-  {
-    icon: MessageCircle,
-    title: "3. カウンセリング",
-    description: "姿勢・不調・目標をヒアリングします。続かなかった理由もここで整理します。",
-    image:
-      "https://images.unsplash.com/photo-1576678927484-cc907957088c?auto=format&fit=crop&w=900&q=80",
-    imageAlt: "トレーナーとカウンセリング",
-  },
-  {
-    icon: Dumbbell,
-    title: "4. 体験",
-    description: "ピラティスまたはパーソナルを、その日の体に合わせて体験します。",
-    image:
-      "https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?auto=format&fit=crop&w=900&q=80",
-    imageAlt: "パーソナルまたはピラティスの体験",
-  },
-  {
-    icon: PersonStanding,
-    title: "5. フィードバック",
-    description: "今日の体の状態と、今後の通い方をお伝えします。",
-    image:
-      "https://images.unsplash.com/photo-1518611012118-696072aa579a?auto=format&fit=crop&w=900&q=80",
-    imageAlt: "体験後のフィードバック",
-  },
+  { icon: MessageCircle, title: "カウンセリング", description: "体の状態と目標をヒアリングします。" },
+  { icon: ScanLine, title: "姿勢・筋力チェック", description: "今の動きと歪みを確認します。" },
+  { icon: PersonStanding, title: "ピラティス体験", description: "マシンで姿勢の整え方を体験します。" },
+  { icon: Dumbbell, title: "パーソナル体験", description: "引き締めのトレーニングを体験します。" },
+  { icon: ClipboardList, title: "プラン案内", description: "通い方と料金をご案内します。" },
 ];
 
 export function LPStep() {
   return (
-    <section className="py-14 sm:py-16 bg-white">
+    <section className="py-16 sm:py-24 bg-pilarim-cream">
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
-        <h2 className="text-base sm:text-lg font-bold text-center text-neutral-900 mb-10 sm:mb-12 tracking-wide">
+        <h2 className="text-xl sm:text-3xl font-bold text-center text-pilarim-ink mb-10 sm:mb-14">
           無料体験の流れ
         </h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {STEPS.map((step) => {
-            const Icon = step.icon;
-            return (
-              <div key={step.title} className="group min-w-0">
-                <div className="relative aspect-[4/3] rounded-2xl overflow-hidden mb-4 shadow-soft bg-neutral-100">
-                  <Image
-                    src={step.image}
-                    alt={step.imageAlt}
-                    fill
-                    className="object-cover transition-transform duration-300 group-hover:scale-105"
-                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
-                  />
-                  <div className="absolute top-3 left-3 w-10 h-10 rounded-xl bg-pilarim-bronze/90 flex items-center justify-center shadow-md">
-                    <Icon className="w-5 h-5 text-white" strokeWidth={2} />
+        <div className="relative">
+          <div
+            className="hidden sm:block absolute top-6 left-[10%] right-[10%] h-px bg-neutral-300"
+            aria-hidden
+          />
+          <div className="grid grid-cols-1 sm:grid-cols-5 gap-8 sm:gap-4">
+            {STEPS.map((step, i) => {
+              const Icon = step.icon;
+              return (
+                <div key={step.title} className="relative text-center px-2">
+                  <div className="relative z-10 mx-auto w-12 h-12 rounded-full bg-pilarim-charcoal text-white flex items-center justify-center text-sm font-bold mb-3">
+                    {i + 1}
                   </div>
+                  <div className="mx-auto w-10 h-10 rounded-xl bg-white border border-neutral-200 flex items-center justify-center mb-3">
+                    <Icon className="w-5 h-5 text-pilarim-bronze" strokeWidth={1.8} />
+                  </div>
+                  <h3 className="text-sm font-bold text-pilarim-ink mb-1">{step.title}</h3>
+                  <p className="text-xs text-neutral-600 leading-relaxed">{step.description}</p>
                 </div>
-                <h3 className="text-sm font-bold text-neutral-900 mb-2">{step.title}</h3>
-                <p className="text-neutral-600 text-xs leading-relaxed">{step.description}</p>
-              </div>
-            );
-          })}
+              );
+            })}
+          </div>
         </div>
       </div>
     </section>

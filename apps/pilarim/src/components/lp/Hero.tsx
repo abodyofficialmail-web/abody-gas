@@ -1,67 +1,68 @@
 import Image from "next/image";
+import { Repeat, Dumbbell, User } from "lucide-react";
+import { CtaButton } from "@/components/lp/CtaButton";
 
-const HERO_IMAGES = [
-  {
-    src: "https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?auto=format&fit=crop&w=1600&q=80",
-    alt: "パーソナルトレーニングで体を整える様子",
-  },
-  {
-    src: "https://images.unsplash.com/photo-1518611012118-696072aa579a?auto=format&fit=crop&w=1600&q=80",
-    alt: "マシンピラティスで姿勢を整える様子",
-  },
+const FEATURES = [
+  { icon: Repeat, label: "ピラティス受け放題" },
+  { icon: Dumbbell, label: "パーソナル受け放題" },
+  { icon: User, label: "毎回マンツーマン" },
 ];
 
 export function LPHero() {
   return (
-    <section className="relative min-h-[70vh] sm:min-h-[75vh] flex flex-col">
-      <div className="absolute inset-0 z-0 overflow-hidden">
-        <div
-          className="absolute inset-0 bg-neutral-900"
-          style={{ clipPath: "polygon(0 0, 55% 0, 45% 100%, 0 100%)" }}
-        >
-          <Image
-            src={HERO_IMAGES[0].src}
-            alt={HERO_IMAGES[0].alt}
-            fill
-            className="object-cover"
-            style={{ objectPosition: "30% center" }}
-            priority
-            sizes="(max-width: 640px) 100vw, 980px"
-          />
+    <section className="bg-white">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 pt-8 pb-14 sm:pt-12 sm:pb-20">
+        <div className="grid grid-cols-2 gap-2 sm:gap-3 rounded-2xl sm:rounded-3xl overflow-hidden mb-10">
+          <div className="relative aspect-[4/5] sm:aspect-[4/3] md:aspect-[5/4]">
+            <Image
+              src="https://images.unsplash.com/photo-1518611012118-696072aa579a?auto=format&fit=crop&w=1400&q=80"
+              alt="トレーナーと一緒に行うマシンピラティス"
+              fill
+              className="object-cover"
+              priority
+              sizes="50vw"
+            />
+          </div>
+          <div className="relative aspect-[4/5] sm:aspect-[4/3] md:aspect-[5/4]">
+            <Image
+              src="https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?auto=format&fit=crop&w=1400&q=80"
+              alt="ダンベルを使ったパーソナルトレーニング"
+              fill
+              className="object-cover"
+              priority
+              sizes="50vw"
+            />
+          </div>
         </div>
-        <div
-          className="absolute inset-0 overflow-hidden bg-neutral-900"
-          style={{ clipPath: "polygon(55% 0, 100% 0, 100% 100%, 45% 100%)" }}
-        >
-          <Image
-            src={HERO_IMAGES[1].src}
-            alt={HERO_IMAGES[1].alt}
-            fill
-            className="object-cover"
-            style={{ objectPosition: "55% 25%" }}
-            priority
-            sizes="(max-width: 640px) 100vw, 980px"
-          />
-        </div>
-        <div className="absolute inset-0 bg-black/25 z-[5]" />
-      </div>
-      <div className="relative z-20 flex flex-col justify-between min-h-[70vh] sm:min-h-[75vh] px-4 sm:px-6 py-6 sm:py-8">
-        <h1 className="font-shippori tracking-wide text-left">
-          <span className="inline-block text-sm sm:text-base md:text-lg font-semibold text-neutral-900 bg-white/95 px-2 py-1 shadow-soft mb-1 w-fit animate-fade-slide-up">
-            姿勢が整えば、体は変わる。
-          </span>
-          <br />
-          <span className="inline-block text-sm sm:text-base md:text-lg font-semibold text-neutral-900 bg-white/95 px-2 py-1 shadow-soft w-fit animate-fade-slide-up-delay">
-            動ける体で、引き締める。
-          </span>
-        </h1>
-        <div>
-          <p className="text-xs sm:text-sm font-medium text-neutral-900 bg-white/90 px-3 py-1.5 max-w-max shadow-soft mb-2">
+
+        <div className="text-center max-w-3xl mx-auto">
+          <p className="text-xs sm:text-sm tracking-wide text-neutral-500 mb-4">
             30代〜50代男性のための姿勢改善・運動習慣スタジオ
           </p>
-          <p className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold text-neutral-900 bg-white/95 px-5 py-3 max-w-max shadow-soft font-shippori tracking-wide">
-            PILARIM 受け放題ピラティス＆パーソナル
-          </p>
+          <h1 className="text-[1.65rem] sm:text-4xl md:text-[42px] font-bold text-pilarim-ink leading-[1.35] tracking-tight">
+            ピラティスも、パーソナルも。
+            <br />
+            通い放題で、理想の体へ。
+          </h1>
+
+          <div className="mt-8 grid grid-cols-1 sm:grid-cols-3 gap-3">
+            {FEATURES.map((item) => {
+              const Icon = item.icon;
+              return (
+                <div
+                  key={item.label}
+                  className="flex items-center justify-center gap-2 rounded-2xl border border-neutral-200 bg-white px-4 py-3 shadow-soft"
+                >
+                  <Icon className="w-4 h-4 text-pilarim-bronze" strokeWidth={1.8} />
+                  <span className="text-sm font-medium text-pilarim-ink">{item.label}</span>
+                </div>
+              );
+            })}
+          </div>
+
+          <CtaButton href="#campaign" className="mt-8 px-10 py-4 text-base shadow-soft">
+            まずは無料体験
+          </CtaButton>
         </div>
       </div>
     </section>

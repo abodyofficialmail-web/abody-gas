@@ -1,11 +1,12 @@
 import { MapPin, ExternalLink } from "lucide-react";
 import { LINE_URL_BY_STORE, STORES } from "@/lib/constants";
+import { CtaButton } from "@/components/lp/CtaButton";
 
 export function LPLocations() {
   return (
     <section className="py-16 sm:py-24 bg-neutral-50">
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
-        <h2 className="text-base sm:text-lg font-bold text-center text-neutral-900 mb-10 sm:mb-12 tracking-wide">
+        <h2 className="text-xl sm:text-3xl font-bold text-center text-pilarim-ink mb-10 sm:mb-12 tracking-wide">
           店舗詳細
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -45,13 +46,9 @@ export function LPLocations() {
                   Googleマップで見る
                 </a>
                 <div className="mt-4">
-                  <a
-                    href={href}
-                    {...(hasLineLink ? { target: "_blank", rel: "noopener noreferrer" } : {})}
-                    className="block w-full py-3 rounded-2xl bg-pilarim-bronze text-white font-semibold text-sm text-center shadow-soft hover:bg-pilarim-bronze-dark transition-colors"
-                  >
+                  <CtaButton href={href} className="w-full py-3 text-sm shadow-soft">
                     {store.name}で初回の無料体験をする
-                  </a>
+                  </CtaButton>
                 </div>
               </div>
             );
