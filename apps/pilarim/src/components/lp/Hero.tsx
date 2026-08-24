@@ -75,12 +75,12 @@ export function LPHero() {
         className="absolute inset-0"
         style={{
           background:
-            "radial-gradient(ellipse at center, rgba(255,255,255,0.92) 0%, rgba(255,255,255,0.78) 42%, rgba(255,255,255,0.52) 100%)",
+            "radial-gradient(ellipse at center, rgba(255,255,255,0.86) 0%, rgba(255,255,255,0.68) 46%, rgba(255,255,255,0.32) 100%)",
         }}
         aria-hidden
       />
 
-      <div className="relative z-10 px-4 sm:px-8 py-14 sm:py-20 text-center">
+      <div className="relative z-10 px-4 sm:px-8 py-16 sm:py-24 text-center">
         <p className="text-xs sm:text-sm tracking-wide text-neutral-600 mb-5">
           30〜50代男性のための受け放題スタジオ
         </p>
