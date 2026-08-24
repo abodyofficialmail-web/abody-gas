@@ -28,7 +28,7 @@ export const STORES = [
     hours: "9:00〜22:00",
     feature: "ピラティス受け放題（1回30分）＋パーソナル",
     pilates: true,
-    borderColor: "#22c55e",
+    borderColor: "#D1653E",
     mapUrl: "https://www.google.com/maps/search/?api=1&query=東京都台東区台東4-31-5",
   },
   {
@@ -39,7 +39,7 @@ export const STORES = [
     hours: "9:00〜22:00",
     feature: "マンツーマン25,000円／ボディメイク・スペシャルメイク・オールインワンあり",
     pilates: true,
-    borderColor: "#a855f7",
+    borderColor: "#2C2C2C",
     mapUrl: "https://www.google.com/maps/search/?api=1&query=東京都新宿区西新宿7-22-39",
   },
 ] as const;

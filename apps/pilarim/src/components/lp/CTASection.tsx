@@ -1,56 +1,55 @@
+import { Check, Shirt, Bath, Footprints, Droplets } from "lucide-react";
 import { LINE_URL_BY_STORE, STORES } from "@/lib/constants";
-import { CAMPAIGN_REMAINING_SLOTS } from "@/lib/campaign";
+import { CAMPAIGN_FIRST_MONTH_PRICE } from "@/lib/campaign";
+import { CtaButton } from "@/components/lp/CtaButton";
+
+const PERKS = [
+  { icon: Shirt, label: "ウェア貸し出し無料" },
+  { icon: Bath, label: "タオル貸し出し無料" },
+  { icon: Footprints, label: "シューズ貸し出し無料" },
+  { icon: Droplets, label: "お水をご用意" },
+];
 
 export function LPCTASection() {
-  const badges = [
-    { label: "無料体験", aria: "無料体験" },
-    { label: "所要1分", aria: "所要約1分" },
-    { label: "LINE調整で安心", aria: "LINEで日程調整" },
-  ];
-
   return (
-    <section className="relative bg-pilarim-cream py-10 md:py-14">
-      <div className="mx-auto w-full max-w-[920px] px-4">
-        <div className="bg-white ring-1 ring-black/5 border border-black/10 shadow-lg rounded-2xl p-6 md:p-8">
-          <div className="flex flex-wrap gap-2 mb-3">
-            {badges.map((b) => (
-              <span
-                key={b.label}
-                className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-neutral-100 text-neutral-700 border border-neutral-200"
-                aria-label={b.aria}
+    <section id="campaign" className="bg-pilarim-charcoal text-white py-14 sm:py-20">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 grid md:grid-cols-2 gap-10 items-center">
+        <div>
+          <p className="text-sm tracking-wide text-white/70 mb-3">期間限定</p>
+          <h2 className="text-2xl sm:text-4xl font-bold leading-tight">
+            まずは無料体験。
+            <br />
+            初月{CAMPAIGN_FIRST_MONTH_PRICE}
+          </h2>
+          <p className="mt-4 text-white/80 text-sm">体験トレーニング・入会金無料</p>
+          <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-3">
+            {STORES.map((store) => (
+              <CtaButton
+                key={store.id}
+                href={LINE_URL_BY_STORE[store.id]}
+                className="h-14"
               >
-                {b.label}
-              </span>
+                {store.name}で無料体験
+              </CtaButton>
             ))}
           </div>
-          <h2 className="text-xl md:text-2xl font-semibold text-neutral-900">まずは無料体験を予約</h2>
-          <p className="text-sm md:text-base text-black/60 mt-2">
-            カウンセリングと体験トレーニング合わせて60分
-            <br />
-            公式ラインご登録後、簡単に体験予約ができます！
-          </p>
-
-          <div className="mt-5 grid grid-cols-1 sm:grid-cols-2 gap-3">
-            {STORES.map((store) => {
-              const lineUrl = LINE_URL_BY_STORE[store.id];
-              const hasLineLink = lineUrl.startsWith("http");
-              const href = hasLineLink ? lineUrl : "#campaign";
+        </div>
+        <div className="rounded-3xl border border-white/20 p-6 sm:p-8">
+          <p className="font-semibold mb-5">無料体験でご用意するもの</p>
+          <ul className="space-y-4">
+            {PERKS.map((item) => {
+              const Icon = item.icon;
               return (
-                <div key={store.id} className="flex flex-col items-center gap-2">
-                  <a
-                    href={href}
-                    {...(hasLineLink ? { target: "_blank", rel: "noopener noreferrer" } : {})}
-                    className="w-full h-14 md:h-16 flex items-center justify-center rounded-xl font-semibold text-base shadow-md hover:shadow-lg focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-pilarim-bronze transition-all px-4 text-center bg-pilarim-bronze hover:bg-pilarim-bronze-dark text-white"
-                  >
-                    {store.name}の無料体験を予約
-                  </a>
-                  <p className="text-xs font-medium text-pilarim-bronze">
-                    オープニングCP 残り{CAMPAIGN_REMAINING_SLOTS}名
-                  </p>
-                </div>
+                <li key={item.label} className="flex items-center gap-3 text-sm text-white/90">
+                  <span className="w-9 h-9 rounded-xl border border-white/20 flex items-center justify-center shrink-0">
+                    <Icon className="w-4 h-4 text-pilarim-bronze" strokeWidth={1.8} />
+                  </span>
+                  <Check className="w-4 h-4 text-pilarim-bronze shrink-0" strokeWidth={2.4} />
+                  {item.label}
+                </li>
               );
             })}
-          </div>
+          </ul>
         </div>
       </div>
     </section>

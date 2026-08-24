@@ -1,4 +1,6 @@
 import { LPHeader } from "@/components/lp/Header";
+import { LPFooter } from "@/components/lp/Footer";
+import { CtaButton } from "@/components/lp/CtaButton";
 import { LINE_URL_RECRUIT } from "@/lib/constants";
 import type { ReactNode } from "react";
 
@@ -57,14 +59,9 @@ export default function RecruitPage() {
             <Section title="応募方法">
               <p>公式LINEから「求人希望」とお送りください。</p>
               {hasLineLink ? (
-                <a
-                  href={href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-block mt-4 px-8 py-4 rounded-2xl bg-pilarim-bronze text-white font-semibold hover:bg-pilarim-bronze-dark transition-colors"
-                >
+                <CtaButton href={href} className="mt-4 px-8 py-4">
                   LINEで応募する
-                </a>
+                </CtaButton>
               ) : (
                 <p className="mt-4 text-sm text-neutral-500">
                   応募用LINEは準備中です。準備ができ次第、こちらからご案内します。
@@ -74,6 +71,7 @@ export default function RecruitPage() {
           </div>
         </div>
       </main>
+      <LPFooter />
     </>
   );
 }
