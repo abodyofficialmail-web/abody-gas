@@ -21,7 +21,9 @@ export function LPFaq() {
   return (
     <section id="faq" className="py-16 sm:py-24 bg-white">
       <div className="max-w-3xl mx-auto px-4 sm:px-6">
-        <h2 className="text-xl sm:text-3xl font-bold text-center text-pilarim-ink mb-10">FAQ</h2>
+        <h2 className="text-xl sm:text-3xl font-bold text-center text-pilarim-ink mb-10">
+          よくある質問
+        </h2>
         <div className="space-y-4">
           {FAQS.map((item) => (
             <details key={item.q} className="group rounded-3xl border border-neutral-200 bg-white p-5 shadow-soft">
