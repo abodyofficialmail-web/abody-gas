@@ -14,12 +14,12 @@ export function LPPrice() {
           <div className="bg-abody-teal rounded-2xl py-8 sm:py-10 px-4 sm:px-6 text-center shadow-soft min-w-0">
             <p className="text-white/90 text-sm sm:text-base font-medium">初回体験</p>
             <p className="text-xl sm:text-2xl md:text-3xl font-bold text-white mt-2">3,000円</p>
-            <p className="text-white/80 text-xs sm:text-sm mt-1">（税別）※夏の特別キャンペーン中は0円</p>
+            <p className="text-white/80 text-xs sm:text-sm mt-1">（税別）※ボディメイクキャンペーン中は0円</p>
           </div>
           <div className="bg-abody-teal rounded-2xl py-8 sm:py-10 px-4 sm:px-6 text-center shadow-soft min-w-0">
             <p className="text-white/90 text-sm sm:text-base font-medium">入会金</p>
             <p className="text-xl sm:text-2xl md:text-3xl font-bold text-white mt-2">15,000円</p>
-            <p className="text-white/80 text-[10px] sm:text-xs mt-1">（税別）※夏の特別キャンペーン中は無料</p>
+            <p className="text-white/80 text-[10px] sm:text-xs mt-1">（税別）※ボディメイクキャンペーン中は無料</p>
           </div>
         </div>
       </div>

@@ -2,8 +2,9 @@
 
 import Image from "next/image";
 import {
-  CAMPAIGN_FIRST_MONTH_PRICE,
+  CAMPAIGN_FIRST_MONTH_SPECIAL,
   CAMPAIGN_IMAGE,
+  CAMPAIGN_LIMIT,
   CAMPAIGN_TITLE,
 } from "@/lib/campaign";
 
@@ -16,7 +17,7 @@ export function LPFixedCampaignBanner() {
           <a
             href="#campaign"
             className="flex-1 min-w-0 flex items-center gap-3 sm:gap-4 group"
-            aria-label="夏の特別キャンペーンを見る"
+            aria-label="ボディメイクキャンペーンを見る"
           >
             <div className="relative w-16 h-11 sm:w-20 sm:h-14 shrink-0 rounded-xl overflow-hidden flex-shrink-0 bg-neutral-100 flex items-center justify-center">
               <Image
@@ -30,7 +31,7 @@ export function LPFixedCampaignBanner() {
             <div className="min-w-0 flex-1">
               <p className="text-sm sm:text-base font-bold text-abody-teal">{CAMPAIGN_TITLE}</p>
               <p className="text-base sm:text-lg font-bold text-neutral-900">
-                初月{CAMPAIGN_FIRST_MONTH_PRICE}（税別）
+                {CAMPAIGN_LIMIT} 初月{CAMPAIGN_FIRST_MONTH_SPECIAL}（税別）
               </p>
               <p className="text-sm text-neutral-600 mt-0.5">
                 体験トレーニング・入会金<span className="font-bold text-abody-teal">無料</span>

@@ -9,7 +9,7 @@ export function LPTopCampaignBar() {
       <a
         href="#campaign"
         className="block w-full py-2.5 px-4 text-center hover:bg-abody-teal-dark transition-colors"
-        aria-label="夏の特別キャンペーンを見る"
+        aria-label="ボディメイクキャンペーンを見る"
       >
         <span className="text-sm sm:text-base font-bold">{CAMPAIGN_BAR_TEXT}</span>
       </a>

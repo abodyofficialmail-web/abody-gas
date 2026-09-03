@@ -1,21 +1,24 @@
-/** 夏の特別キャンペーン（LP共通） */
-export const CAMPAIGN_IMAGE = "/campaign.png";
+/** ボディメイクキャンペーン（LP共通） */
+export const CAMPAIGN_IMAGE = "/campaign.jpg";
 export const CAMPAIGN_IMAGE_ALT =
-  "Abody 夏の特別キャンペーン 初月9,800円 体験トレーニング・入会金無料";
+  "Abody ボディメイクキャンペーン 先着5名限定 初月980円 パーソナルトレーニング受け放題";
 
-export const CAMPAIGN_TITLE = "夏の特別キャンペーン";
-export const CAMPAIGN_SUBTITLE = "今年こそ、理想のカラダを手に入れるチャンス！";
-export const CAMPAIGN_PERIOD = "8.1（土）〜 8.23（日）";
-export const CAMPAIGN_LIMIT = "先着5名様限定";
+export const CAMPAIGN_TITLE = "鍛えて整える ボディメイクキャンペーン";
+export const CAMPAIGN_SUBTITLE = "無理なく続くから、継続できる。";
+export const CAMPAIGN_PERIOD = "9.1（火）〜 9.23（水）";
+export const CAMPAIGN_LIMIT = "先着5名限定";
 export const CAMPAIGN_FIRST_MONTH_ORIGINAL = "30,800円";
 export const CAMPAIGN_FIRST_MONTH_PRICE = "9,800円";
+export const CAMPAIGN_FIRST_MONTH_SPECIAL = "980円";
+export const CAMPAIGN_GIFT =
+  "パーソナルストレッチ＋筋膜リリース 30分×2回プレゼント";
 
 export const CAMPAIGN_REMAINING_SLOTS: Record<string, number> = {
-  shinjuku: 4,
-  ueno: 3,
-  sakuragicho: 3,
-  ebisu: 2,
-  fukuoka: 3,
+  shinjuku: 5,
+  ueno: 5,
+  sakuragicho: 5,
+  ebisu: 5,
+  fukuoka: 5,
 };
 
 export const CAMPAIGN_STORES = [
@@ -52,4 +55,4 @@ export const CAMPAIGN_STORES = [
 ] as const;
 
 export const CAMPAIGN_BAR_TEXT =
-  "【夏の特別CP】初月9,800円｜体験・入会金無料｜8/1〜8/23";
+  "【ボディメイクCP】先着5名 初月980円｜体験・入会金無料｜9/1〜9/23";

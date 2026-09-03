@@ -69,7 +69,7 @@ export function LPCTASection() {
                   {store.name}の無料体験を予約
                 </LineButton>
                 <p className="text-xs font-medium text-abody-teal">
-                  夏の特別CP 残り{CAMPAIGN_REMAINING_SLOTS[store.id]}名
+                  ボディメイクCP 残り{CAMPAIGN_REMAINING_SLOTS[store.id]}名
                 </p>
               </div>
             ))}

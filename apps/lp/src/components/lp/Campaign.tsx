@@ -4,6 +4,8 @@ import Image from "next/image";
 import {
   CAMPAIGN_FIRST_MONTH_ORIGINAL,
   CAMPAIGN_FIRST_MONTH_PRICE,
+  CAMPAIGN_FIRST_MONTH_SPECIAL,
+  CAMPAIGN_GIFT,
   CAMPAIGN_IMAGE,
   CAMPAIGN_IMAGE_ALT,
   CAMPAIGN_LIMIT,
@@ -18,7 +20,7 @@ export function LPCampaign() {
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
         <div className="bg-white rounded-2xl overflow-hidden shadow-soft border border-abody-teal/20">
           <div className="flex justify-center items-center w-full bg-neutral-100">
-            <div className="relative w-full max-w-[720px] aspect-[1024/535] mx-auto">
+            <div className="relative w-full max-w-[720px] aspect-[1024/543] mx-auto">
               <Image
                 src={CAMPAIGN_IMAGE}
                 alt={CAMPAIGN_IMAGE_ALT}
@@ -40,18 +42,28 @@ export function LPCampaign() {
 
             <div className="text-left max-w-lg mx-auto space-y-5 text-neutral-700 text-sm sm:text-base">
               <p>
-                初月料金
+                パーソナルトレーニング受け放題
+              </p>
+              <p>
+                初月月会費
                 <span className="line-through text-neutral-400 mx-1">
                   {CAMPAIGN_FIRST_MONTH_ORIGINAL}
                 </span>
-                <span className="text-abody-teal font-bold text-lg sm:text-xl">
-                  → {CAMPAIGN_FIRST_MONTH_PRICE}（税別）
+                <span className="text-neutral-900 font-bold">
+                  {CAMPAIGN_FIRST_MONTH_PRICE}
+                </span>
+                <span className="block mt-1">
+                  さらに{CAMPAIGN_LIMIT}
+                  <span className="text-abody-teal font-bold text-lg sm:text-xl ml-1">
+                    {CAMPAIGN_FIRST_MONTH_SPECIAL}（税別）
+                  </span>
                 </span>
               </p>
 
               <ul className="space-y-2 list-none">
                 <li>🎁 <span className="font-bold text-abody-teal">体験トレーニング無料</span></li>
                 <li>🎁 <span className="font-bold text-abody-teal">入会金無料</span></li>
+                <li>🎁 <span className="font-bold text-abody-teal">{CAMPAIGN_GIFT}</span></li>
               </ul>
 
               <p className="text-sm text-neutral-600">

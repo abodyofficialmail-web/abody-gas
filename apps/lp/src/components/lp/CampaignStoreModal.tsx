@@ -72,7 +72,7 @@ export function CampaignStoreModal({ isOpen, onClose }: Props) {
         </div>
         <div className="p-6 space-y-4">
           <p className="text-sm text-neutral-600">
-            夏の特別キャンペーンの残り枠は店舗により異なります。予約はLINEで完了します。
+            ボディメイクキャンペーンの残り枠は店舗により異なります。予約はLINEで完了します。
           </p>
           {CAMPAIGN_STORES.map((store) => (
             <div
