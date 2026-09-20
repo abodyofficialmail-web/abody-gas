@@ -6,15 +6,15 @@ import { TRAINERS, type Trainer } from "@/lib/trainers";
 
 export function LPTrainerList() {
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+    <div className="grid grid-cols-2 gap-3 sm:gap-6">
       {TRAINERS.map((trainer) => (
         <article
           key={trainer.id}
           className="bg-white rounded-2xl shadow-soft border border-neutral-100 overflow-hidden flex flex-col"
         >
           <TrainerPhoto trainer={trainer} />
-          <div className="p-5 flex flex-col gap-4 flex-1">
-            <p className="text-sm font-semibold text-abody-teal leading-relaxed whitespace-pre-line">{trainer.catch}</p>
+          <div className="p-3 sm:p-5 flex flex-col gap-2.5 sm:gap-4 flex-1">
+            <p className="text-xs sm:text-sm font-semibold text-abody-teal leading-relaxed whitespace-pre-line">{trainer.catch}</p>
             {trainer.credentials && trainer.credentials.length > 0 && (
               <ProfileBlock title="実績 / 資格">
                 <TagList items={trainer.credentials} />
@@ -22,7 +22,7 @@ export function LPTrainerList() {
             )}
             {trainer.experience && (
               <ProfileBlock title="トレーニング歴">
-                <p className="text-sm text-neutral-700">{trainer.experience}</p>
+                <p className="text-xs sm:text-sm text-neutral-700">{trainer.experience}</p>
               </ProfileBlock>
             )}
             <ProfileBlock title="得意なトレーニング">
@@ -43,7 +43,7 @@ export function LPTrainerList() {
 function ProfileBlock({ title, children }: { title: string; children: ReactNode }) {
   return (
     <div>
-      <p className="text-xs font-bold text-neutral-500 mb-2 tracking-wide">{title}</p>
+      <p className="text-[10px] sm:text-xs font-bold text-neutral-500 mb-1.5 sm:mb-2 tracking-wide">{title}</p>
       {children}
     </div>
   );
@@ -55,7 +55,7 @@ function TagList({ items }: { items: string[] }) {
       {items.map((item) => (
         <li
           key={item}
-          className="text-xs font-medium text-abody-teal bg-abody-teal/10 rounded-full px-3 py-1"
+            className="text-[10px] sm:text-xs font-medium text-abody-teal bg-abody-teal/10 rounded-full px-2 sm:px-3 py-0.5 sm:py-1"
         >
           {item}
         </li>
@@ -104,7 +104,7 @@ function TrainerPhoto({ trainer }: { trainer: Trainer }) {
         </div>
       )}
       <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/70 via-black/25 to-transparent px-5 pb-4 pt-16">
-        <h2 className="text-white text-xl font-bold tracking-wide">
+        <h2 className="text-white text-base sm:text-xl font-bold tracking-wide">
           {trainer.name}
           {trainer.nameEn && (
             <span className="ml-2 text-sm font-medium text-white/75">{trainer.nameEn}</span>

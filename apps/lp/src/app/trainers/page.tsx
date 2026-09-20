@@ -15,8 +15,8 @@ export default function TrainersPage() {
   return (
     <>
       <LPHeader />
-      <main className="pb-56 sm:pb-64 min-h-screen bg-[#e8f6f3]">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 pt-10 pb-8">
+      <main className="pb-24 sm:pb-12 min-h-screen bg-[#e8f6f3]">
+        <div className="max-w-6xl mx-auto px-3 sm:px-6 pt-10 pb-8">
           <div className="text-center mb-8">
             <p className="text-xs font-medium tracking-[0.2em] text-abody-teal mb-2">TRAINERS</p>
             <h1 className="text-2xl sm:text-3xl font-bold text-neutral-900 tracking-wide">
