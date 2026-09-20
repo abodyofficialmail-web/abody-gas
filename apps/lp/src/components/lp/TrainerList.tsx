@@ -87,13 +87,13 @@ function TrainerPhoto({ trainer }: { trainer: Trainer }) {
         </div>
       )}
       {gallery.length > 1 && (
-        <div className="absolute top-3 right-3 z-10 flex gap-1.5">
+        <div className="absolute bottom-3 right-3 z-20 flex gap-1.5">
           {gallery.map((src, i) => (
             <button
               key={src}
               type="button"
               onClick={() => setIndex(i)}
-              className={`relative h-12 w-9 overflow-hidden rounded-lg border-2 !p-0 !w-9 !h-12 ${
+              className={`relative overflow-hidden rounded-lg border-2 !p-0 !w-8 !h-10 sm:!w-9 sm:!h-12 ${
                 i === index ? "!border-white" : "!border-white/40"
               }`}
               aria-label={`${trainer.name}の写真${i + 1}`}
@@ -103,7 +103,7 @@ function TrainerPhoto({ trainer }: { trainer: Trainer }) {
           ))}
         </div>
       )}
-      <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/70 via-black/25 to-transparent px-5 pb-4 pt-16">
+      <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/70 via-black/25 to-transparent px-3 sm:px-5 pb-4 pt-16 pr-28 sm:pr-36">
         <h2 className="text-white text-base sm:text-xl font-bold tracking-wide">
           {trainer.name}
           {trainer.nameEn && (
