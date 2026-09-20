@@ -48,6 +48,28 @@ export const TRAINERS: Trainer[] = [
     strengths: ["筋肥大", "ストレッチ"],
     hobbies: ["映画鑑賞", "サッカー観戦"],
   },
+  {
+    id: "hiromu",
+    name: "ひろむ",
+    nameEn: "Hiromu",
+    photo: "/trainers/hiromu.jpg",
+    stores: [],
+    catch: "初心者からコンテスト出場を考えてるお客様等抜かりなく、丁寧にしっかりサポートさせていただきます！\n今日も最高の1日にしよう！",
+    experience: "1年半",
+    strengths: ["ダイエット", "バルクアップ"],
+  },
+  {
+    id: "seiya",
+    name: "せいや",
+    nameEn: "Seiya",
+    photo: "/trainers/seiya.jpg",
+    stores: [],
+    catch: "身体を変えることで人生を変えるお手伝いいたします！",
+    credentials: ["大会出場あり", "栄養コンシェルジュ1つ星"],
+    experience: "8年",
+    strengths: ["追い込み", "筋肥大"],
+    hobbies: ["サウナ", "格闘技観戦", "サッカー観戦"],
+  },
 ];
 
 export function storeName(id: TrainerStoreId): string {

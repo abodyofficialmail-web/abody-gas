@@ -14,7 +14,7 @@ export function LPTrainerList() {
         >
           <TrainerPhoto trainer={trainer} />
           <div className="p-5 flex flex-col gap-4 flex-1">
-            <p className="text-sm font-semibold text-abody-teal leading-relaxed">{trainer.catch}</p>
+            <p className="text-sm font-semibold text-abody-teal leading-relaxed whitespace-pre-line">{trainer.catch}</p>
             {trainer.credentials && trainer.credentials.length > 0 && (
               <ProfileBlock title="実績 / 資格">
                 <TagList items={trainer.credentials} />
@@ -110,9 +110,11 @@ function TrainerPhoto({ trainer }: { trainer: Trainer }) {
             <span className="ml-2 text-sm font-medium text-white/75">{trainer.nameEn}</span>
           )}
         </h2>
-        <p className="mt-1 text-white/85 text-xs">
-          {trainer.stores.map(storeName).join(" / ")}
-        </p>
+        {trainer.stores.length > 0 && (
+          <p className="mt-1 text-white/85 text-xs">
+            {trainer.stores.map(storeName).join(" / ")}
+          </p>
+        )}
       </div>
     </div>
   );
