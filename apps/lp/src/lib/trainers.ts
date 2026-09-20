@@ -40,6 +40,7 @@ export const TRAINERS: Trainer[] = [
     name: "ひろむ",
     nameEn: "Hiromu",
     photo: "/trainers/hiromu.jpg",
+    photos: ["/trainers/hiromu.jpg", "/trainers/hiromu-stage.jpg"],
     catch: "初心者からコンテスト出場を考えてるお客様等抜かりなく、丁寧にしっかりサポートさせていただきます！\n今日も最高の1日にしよう！",
     experience: "1年半",
     strengths: ["ダイエット", "バルクアップ"],
