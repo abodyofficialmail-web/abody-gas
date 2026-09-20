@@ -33,10 +33,10 @@ export function LPHeader() {
             ABODY
           </Link>
           <Link
-            href="/trainers"
-            className="hidden md:inline text-sm font-medium text-neutral-600 hover:text-abody-teal transition-colors"
+            href="/#ai-diagnosis"
+            className="hidden md:inline text-sm font-bold text-abody-teal hover:text-abody-teal-dark transition-colors"
           >
-            トレーナー
+            AI診断
           </Link>
         </div>
         <nav className="hidden md:flex items-center gap-6">
@@ -75,11 +75,11 @@ export function LPHeader() {
         <div className="md:hidden border-t border-neutral-100 bg-white py-4 px-4">
           <div className="space-y-2">
             <Link
-              href="/trainers"
+              href="/#ai-diagnosis"
               onClick={() => setMobileMenuOpen(false)}
-              className="block w-full text-left px-4 py-2 rounded-2xl text-neutral-700 font-medium"
+              className="block w-full text-left px-4 py-2 rounded-2xl text-abody-teal font-bold"
             >
-              トレーナー紹介
+              AI診断
             </Link>
             <p className="text-xs text-neutral-500 mb-2">店舗を選択</p>
             {STORES.map((s) => (

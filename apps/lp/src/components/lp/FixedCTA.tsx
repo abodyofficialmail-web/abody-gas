@@ -1,9 +1,13 @@
 "use client";
 
+import { usePathname } from "next/navigation";
 import { LINE_URL } from "@/lib/constants";
 import { navigateToLine } from "@/lib/googleAdsTracking";
 
 export function LPFixedCTA() {
+  const pathname = usePathname();
+  if (pathname === "/trainers") return null;
+
   return (
     <div className="fixed bottom-0 left-0 right-0 z-50 p-4 pb-safe bg-white/95 backdrop-blur border-t border-neutral-100 md:hidden">
       <a

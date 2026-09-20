@@ -1,9 +1,13 @@
 "use client";
 
+import { usePathname } from "next/navigation";
 import { CAMPAIGN_BAR_TEXT } from "@/lib/campaign";
 
 /** 常に表示するキャンペーンバナー */
 export function LPTopCampaignBar() {
+  const pathname = usePathname();
+  if (pathname === "/trainers") return null;
+
   return (
     <div className="sticky top-0 left-0 right-0 z-[100] bg-abody-teal text-white shadow-md">
       <a
