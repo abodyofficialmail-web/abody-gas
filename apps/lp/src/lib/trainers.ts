@@ -28,7 +28,7 @@ export const TRAINERS: Trainer[] = [
     name: "ともき",
     nameEn: "Tomoki",
     photo: "/trainers/tomoki.jpg",
-    photos: ["/trainers/tomoki.jpg", "/trainers/tomoki-stage.jpg"],
+    photos: ["/trainers/tomoki.jpg", "/trainers/tomoki-stage.jpg", "/trainers/tomoki-casual.jpg"],
     catch: "トレーニングは、きつさより楽しさ。楽しく長く続けることを、1番大切にしてます‼",
     credentials: ["JATIトレーニング指導者", "健康運動実践指導者"],
     experience: "9年",
