@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, type ReactNode } from "react";
 import Image from "next/image";
 import { TRAINERS, storeName, type Trainer } from "@/lib/trainers";
 
@@ -13,26 +13,54 @@ export function LPTrainerList() {
           className="bg-white rounded-2xl shadow-soft border border-neutral-100 overflow-hidden flex flex-col"
         >
           <TrainerPhoto trainer={trainer} />
-          <div className="p-5 flex flex-col gap-3 flex-1">
-            <p className="text-sm font-semibold text-abody-teal">{trainer.catch}</p>
-            <div>
-              <p className="text-xs font-bold text-neutral-500 mb-2 tracking-wide">強み</p>
-              <ul className="flex flex-wrap gap-2">
-                {trainer.strengths.map((s) => (
-                  <li
-                    key={s}
-                    className="text-xs font-medium text-abody-teal bg-abody-teal/10 rounded-full px-3 py-1"
-                  >
-                    {s}
-                  </li>
-                ))}
-              </ul>
-            </div>
-            <p className="text-sm text-neutral-600 leading-relaxed">{trainer.bio}</p>
+          <div className="p-5 flex flex-col gap-4 flex-1">
+            <p className="text-sm font-semibold text-abody-teal leading-relaxed">{trainer.catch}</p>
+            {trainer.credentials && trainer.credentials.length > 0 && (
+              <ProfileBlock title="実績 / 資格">
+                <TagList items={trainer.credentials} />
+              </ProfileBlock>
+            )}
+            {trainer.experience && (
+              <ProfileBlock title="トレーニング歴">
+                <p className="text-sm text-neutral-700">{trainer.experience}</p>
+              </ProfileBlock>
+            )}
+            <ProfileBlock title="得意なトレーニング">
+              <TagList items={trainer.strengths} />
+            </ProfileBlock>
+            {trainer.hobbies && trainer.hobbies.length > 0 && (
+              <ProfileBlock title="趣味">
+                <TagList items={trainer.hobbies} />
+              </ProfileBlock>
+            )}
           </div>
         </article>
       ))}
     </div>
+  );
+}
+
+function ProfileBlock({ title, children }: { title: string; children: ReactNode }) {
+  return (
+    <div>
+      <p className="text-xs font-bold text-neutral-500 mb-2 tracking-wide">{title}</p>
+      {children}
+    </div>
+  );
+}
+
+function TagList({ items }: { items: string[] }) {
+  return (
+    <ul className="flex flex-wrap gap-2">
+      {items.map((item) => (
+        <li
+          key={item}
+          className="text-xs font-medium text-abody-teal bg-abody-teal/10 rounded-full px-3 py-1"
+        >
+          {item}
+        </li>
+      ))}
+    </ul>
   );
 }
 

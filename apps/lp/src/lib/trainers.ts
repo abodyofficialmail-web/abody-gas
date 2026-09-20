@@ -18,9 +18,16 @@ export type Trainer = {
   /** 追加写真。カード内で切り替え表示する */
   photos?: string[];
   stores: TrainerStoreId[];
+  /** 一言 */
   catch: string;
+  /** 実績/資格 */
+  credentials?: string[];
+  /** トレーニング歴 */
+  experience?: string;
+  /** 得意なトレーニング */
   strengths: string[];
-  bio: string;
+  /** 趣味 */
+  hobbies?: string[];
 };
 
 /**
@@ -35,9 +42,11 @@ export const TRAINERS: Trainer[] = [
     photo: "/trainers/tomoki.jpg",
     photos: ["/trainers/tomoki.jpg", "/trainers/tomoki-stage.jpg"],
     stores: ["ebisu", "shinjuku"],
-    catch: "続けられる形に落とすのが得意",
-    strengths: ["初心者の習慣化", "ボディメイク", "フィジーク"],
-    bio: "「何から始めればいいかわからない」という方の最初の一歩を一緒に作ります。難しい種目を押し付けるのではなく、生活に合うペースで結果が出るトレーニングに落とすのが強みです。フィジーク大会にも出場し、見た目づくりの実体験も指導に活かしています。",
+    catch: "トレーニングは、きつさより楽しさ。楽しく長く続けることを、1番大切にしてます‼",
+    credentials: ["JATIトレーニング指導者", "健康運動実践指導者"],
+    experience: "9年",
+    strengths: ["筋肥大", "ストレッチ"],
+    hobbies: ["映画鑑賞", "サッカー観戦"],
   },
 ];
 
