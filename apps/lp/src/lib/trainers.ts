@@ -1,14 +1,3 @@
-/** 店舗ID（Header / Locations と揃える） */
-export const TRAINER_STORES = [
-  { id: "ebisu", name: "恵比寿店" },
-  { id: "ueno", name: "上野店" },
-  { id: "sakuragicho", name: "桜木町店" },
-  { id: "shinjuku", name: "新宿店" },
-  { id: "fukuoka", name: "福岡店" },
-] as const;
-
-export type TrainerStoreId = (typeof TRAINER_STORES)[number]["id"];
-
 export type Trainer = {
   id: string;
   name: string;
@@ -17,7 +6,6 @@ export type Trainer = {
   photo?: string;
   /** 追加写真。カード内で切り替え表示する */
   photos?: string[];
-  stores: TrainerStoreId[];
   /** 一言 */
   catch: string;
   /** 実績/資格 */
@@ -41,7 +29,6 @@ export const TRAINERS: Trainer[] = [
     nameEn: "Tomoki",
     photo: "/trainers/tomoki.jpg",
     photos: ["/trainers/tomoki.jpg", "/trainers/tomoki-stage.jpg"],
-    stores: ["ebisu", "shinjuku"],
     catch: "トレーニングは、きつさより楽しさ。楽しく長く続けることを、1番大切にしてます‼",
     credentials: ["JATIトレーニング指導者", "健康運動実践指導者"],
     experience: "9年",
@@ -53,7 +40,6 @@ export const TRAINERS: Trainer[] = [
     name: "ひろむ",
     nameEn: "Hiromu",
     photo: "/trainers/hiromu.jpg",
-    stores: [],
     catch: "初心者からコンテスト出場を考えてるお客様等抜かりなく、丁寧にしっかりサポートさせていただきます！\n今日も最高の1日にしよう！",
     experience: "1年半",
     strengths: ["ダイエット", "バルクアップ"],
@@ -63,7 +49,6 @@ export const TRAINERS: Trainer[] = [
     name: "せいや",
     nameEn: "Seiya",
     photo: "/trainers/seiya.jpg",
-    stores: [],
     catch: "身体を変えることで人生を変えるお手伝いいたします！",
     credentials: ["大会出場あり", "栄養コンシェルジュ1つ星"],
     experience: "8年",
@@ -75,7 +60,6 @@ export const TRAINERS: Trainer[] = [
     name: "たけはる",
     nameEn: "Takeharu",
     photo: "/trainers/takeharu.jpg",
-    stores: [],
     catch: "自分と一緒に、ボディメイク頑張りましょう🔥",
     credentials: ["FWJ茨城大会 ビギナー7位", "FWJ茨城大会 オープン6位"],
     experience: "2年半",
@@ -87,7 +71,6 @@ export const TRAINERS: Trainer[] = [
     name: "りょう",
     nameEn: "Ryo",
     photo: "/trainers/ryo.jpg",
-    stores: [],
     catch: "トレーニングは身体も心も変わります！\n理想の身体に向けて全力でサポート致します！",
     credentials: [
       "NESTA RTS",
@@ -106,7 +89,6 @@ export const TRAINERS: Trainer[] = [
     name: "ゆうと",
     nameEn: "Yuto",
     photo: "/trainers/yuto.jpg",
-    stores: [],
     catch: "「できない」から「できる」へ。\nその感動体験を通じながら、目標達成に向けて全力でサポートいたします！",
     credentials: ["NSCA-CPT", "NACM-CPT", "トレーニング検定2級"],
     experience: "8年",
@@ -114,7 +96,3 @@ export const TRAINERS: Trainer[] = [
     hobbies: ["サウナ", "野球観戦"],
   },
 ];
-
-export function storeName(id: TrainerStoreId): string {
-  return TRAINER_STORES.find((s) => s.id === id)?.name ?? id;
-}

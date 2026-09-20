@@ -2,7 +2,7 @@
 
 import { useState, type ReactNode } from "react";
 import Image from "next/image";
-import { TRAINERS, storeName, type Trainer } from "@/lib/trainers";
+import { TRAINERS, type Trainer } from "@/lib/trainers";
 
 export function LPTrainerList() {
   return (
@@ -110,11 +110,6 @@ function TrainerPhoto({ trainer }: { trainer: Trainer }) {
             <span className="ml-2 text-sm font-medium text-white/75">{trainer.nameEn}</span>
           )}
         </h2>
-        {trainer.stores.length > 0 && (
-          <p className="mt-1 text-white/85 text-xs">
-            {trainer.stores.map(storeName).join(" / ")}
-          </p>
-        )}
       </div>
     </div>
   );
