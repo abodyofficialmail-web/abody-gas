@@ -87,13 +87,13 @@ function TrainerPhoto({ trainer }: { trainer: Trainer }) {
         </div>
       )}
       {gallery.length > 1 && (
-        <div className="absolute bottom-3 right-3 z-20 flex gap-1.5">
+        <div className="absolute bottom-14 right-2 z-20 flex gap-1">
           {gallery.map((src, i) => (
             <button
               key={src}
               type="button"
               onClick={() => setIndex(i)}
-              className={`relative overflow-hidden rounded-lg border-2 !p-0 !w-8 !h-10 sm:!w-9 sm:!h-12 ${
+              className={`relative overflow-hidden rounded-md border-2 !p-0 !w-7 !h-9 sm:!w-9 sm:!h-12 ${
                 i === index ? "!border-white" : "!border-white/40"
               }`}
               aria-label={`${trainer.name}の写真${i + 1}`}
@@ -103,15 +103,15 @@ function TrainerPhoto({ trainer }: { trainer: Trainer }) {
           ))}
         </div>
       )}
-      <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/70 via-black/25 to-transparent px-3 sm:px-5 pb-4 pt-16 pr-24 sm:pr-36">
-        <h2 className="text-white text-sm sm:text-xl font-bold tracking-wide flex items-baseline gap-1.5 whitespace-nowrap">
-          <span>{trainer.name}</span>
-          {trainer.nameEn && (
-            <span className="text-[11px] sm:text-sm font-medium text-white/75 whitespace-nowrap">
-              {trainer.nameEn}
-            </span>
-          )}
+      <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/70 via-black/25 to-transparent px-3 sm:px-5 pb-3 pt-16">
+        <h2 className="text-white text-sm sm:text-xl font-bold tracking-wide whitespace-nowrap">
+          {trainer.name}
         </h2>
+        {trainer.nameEn && (
+          <p className="mt-0.5 text-[11px] sm:text-sm font-medium text-white/75 whitespace-nowrap">
+            {trainer.nameEn}
+          </p>
+        )}
       </div>
     </div>
   );
