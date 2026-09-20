@@ -103,11 +103,13 @@ function TrainerPhoto({ trainer }: { trainer: Trainer }) {
           ))}
         </div>
       )}
-      <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/70 via-black/25 to-transparent px-3 sm:px-5 pb-4 pt-16 pr-28 sm:pr-36">
-        <h2 className="text-white text-base sm:text-xl font-bold tracking-wide">
-          {trainer.name}
+      <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/70 via-black/25 to-transparent px-3 sm:px-5 pb-4 pt-16 pr-24 sm:pr-36">
+        <h2 className="text-white text-sm sm:text-xl font-bold tracking-wide flex items-baseline gap-1.5 whitespace-nowrap">
+          <span>{trainer.name}</span>
           {trainer.nameEn && (
-            <span className="ml-2 text-sm font-medium text-white/75">{trainer.nameEn}</span>
+            <span className="text-[11px] sm:text-sm font-medium text-white/75 whitespace-nowrap">
+              {trainer.nameEn}
+            </span>
           )}
         </h2>
       </div>
