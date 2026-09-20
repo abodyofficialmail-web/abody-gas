@@ -4,6 +4,7 @@ import { LPInstagramReels } from "@/components/lp/InstagramReels";
 import { LPPrice } from "@/components/lp/Price";
 import { LPCampaign } from "@/components/lp/Campaign";
 import { LPFeatures } from "@/components/lp/Features";
+import { LPAIDiagnosis } from "@/components/lp/AIDiagnosis";
 import { LPBeforeAfter } from "@/components/lp/BeforeAfter";
 import { LPReviews } from "@/components/lp/Reviews";
 import { LPOptions } from "@/components/lp/Options";
@@ -24,6 +25,7 @@ export default function Page() {
         <LPPrice />
         <LPCampaign />
         <LPFeatures />
+        <LPAIDiagnosis />
         <LPBeforeAfter />
         <LPReviews />
         <LPOptions />
