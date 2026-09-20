@@ -1,6 +1,5 @@
 "use client";
 
-import { usePathname } from "next/navigation";
 import Image from "next/image";
 import {
   CAMPAIGN_FIRST_MONTH_SPECIAL,
@@ -11,9 +10,6 @@ import {
 
 /** 常に下部に表示するキャンペーンバナー */
 export function LPFixedCampaignBanner() {
-  const pathname = usePathname();
-  if (pathname === "/trainers") return null;
-
   return (
     <div className="fixed bottom-0 left-0 right-0 z-[100] bg-white shadow-[0_-4px_24px_rgba(0,0,0,0.12)] border-t border-abody-teal/20">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 py-3 sm:py-4">

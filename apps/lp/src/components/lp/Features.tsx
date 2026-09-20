@@ -217,7 +217,7 @@ export function LPFeatures() {
           <h2 className="font-shippori text-xl sm:text-3xl text-center text-neutral-900 tracking-wide leading-relaxed mb-10 sm:mb-14">
             自分にあったパーソナルで
             <br />
-            最短でボディメイク
+            最短でボディメイクしませんか？
           </h2>
           <div className="grid sm:grid-cols-2 gap-5 sm:gap-6">
             {GOALS.map((goal) => (
