@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { LPHeader } from "@/components/lp/Header";
-import { LPFixedCTA } from "@/components/lp/FixedCTA";
 import { LPTrainerList } from "@/components/lp/TrainerList";
 import { LINE_URL } from "@/lib/constants";
 
@@ -15,7 +14,7 @@ export default function TrainersPage() {
   return (
     <>
       <LPHeader />
-      <main className="pb-24 sm:pb-12 min-h-screen bg-[#e8f6f3]">
+      <main className="pb-8 min-h-screen bg-[#e8f6f3]">
         <div className="max-w-6xl mx-auto px-3 sm:px-6 pt-10 pb-8">
           <div className="text-center mb-8">
             <p className="text-xs font-medium tracking-[0.2em] text-abody-teal mb-2">TRAINERS</p>
@@ -47,7 +46,6 @@ export default function TrainersPage() {
           </section>
         </div>
       </main>
-      <LPFixedCTA />
     </>
   );
 }
