@@ -3,9 +3,7 @@ import { LPHero } from "@/components/lp/Hero";
 import { LPInstagramReels } from "@/components/lp/InstagramReels";
 import { LPPrice } from "@/components/lp/Price";
 import { LPCampaign } from "@/components/lp/Campaign";
-import { LPIntroduction } from "@/components/lp/Introduction";
-import { LPLifestyleSection } from "@/components/lp/LifestyleSection";
-import { LPProgram } from "@/components/lp/Program";
+import { LPFeatures } from "@/components/lp/Features";
 import { LPBeforeAfter } from "@/components/lp/BeforeAfter";
 import { LPReviews } from "@/components/lp/Reviews";
 import { LPOptions } from "@/components/lp/Options";
@@ -25,9 +23,7 @@ export default function Page() {
         <LPInstagramReels />
         <LPPrice />
         <LPCampaign />
-        <LPIntroduction />
-        <LPProgram />
-        <LPLifestyleSection />
+        <LPFeatures />
         <LPBeforeAfter />
         <LPReviews />
         <LPOptions />
