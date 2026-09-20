@@ -1,0 +1,23 @@
+{
+  "name": "abody-gas",
+  "install": "bash .cursor/install.sh",
+  "terminals": [
+    {
+      "name": "gym-booking (root)",
+      "command": "PORT=3000 npm run dev"
+    },
+    {
+      "name": "abody-lp",
+      "command": "cd apps/lp && PORT=3001 npm run dev"
+    },
+    {
+      "name": "pilarim-lp",
+      "command": "cd apps/pilarim && PORT=3002 npm run dev"
+    },
+    {
+      "name": "ueno-gym",
+      "command": "cd apps/ueno-gym && PORT=3003 npm run dev"
+    }
+  ],
+  "ports": [3000, 3001, 3002, 3003]
+}
