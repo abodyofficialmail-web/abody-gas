@@ -44,6 +44,7 @@ export const TRAINERS: Trainer[] = [
     catch: "初心者からコンテスト出場を考えてるお客様等抜かりなく、丁寧にしっかりサポートさせていただきます！\n今日も最高の1日にしよう！",
     experience: "1年半",
     strengths: ["ダイエット", "バルクアップ"],
+    hobbies: ["クラブ", "飲酒"],
   },
   {
     id: "seiya",
