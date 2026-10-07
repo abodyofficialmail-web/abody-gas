@@ -1,50 +1,64 @@
-export function LPOptions() {
-  const OPTIONS = [
-    {
-      name: "60分受け放題",
-      price: "+25,000",
-      unit: "円",
-      description: "30分じゃ物足りない方やストレッチかピラティス30分トレーニング30分などオリジナルにカスタマイズできます",
-    },
-    {
-      name: "着替えレンタル",
-      price: "3,300",
-      unit: "円",
-      description: "",
-    },
-    {
-      name: "食事パーソナル",
-      price: "9,800",
-      unit: "円",
-      description: "※効果が実感できなかったら返金保証付き",
-    },
-  ];
+import { Shirt, Ticket, UtensilsCrossed, Waves } from "lucide-react";
 
+const OPTIONS = [
+  {
+    name: "手ぶらプラン",
+    description: "タオル・ウェア貸出",
+    price: "3,300",
+    icon: Shirt,
+  },
+  {
+    name: "筋膜リリース",
+    description: "20分",
+    price: "3,300",
+    icon: Waves,
+  },
+  {
+    name: "食事パーソナル",
+    description: "マンツーマン食事指導",
+    price: "15,000",
+    icon: UtensilsCrossed,
+  },
+  {
+    name: "パーソナル回数券",
+    description: "30分",
+    price: "4,500",
+    icon: Ticket,
+  },
+] as const;
+
+export function LPOptions() {
   return (
-    <section className="py-14 sm:py-16 bg-neutral-50">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6">
-        <h2 className="text-base sm:text-lg font-bold text-center text-neutral-900 mb-2 tracking-wide">オプション</h2>
-        <p className="text-center text-neutral-500 text-xs sm:text-sm mb-6">こちらは任意で必ずご利用いただく必要や営業はございません</p>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {OPTIONS.map((item) => (
+    <div className="mt-8">
+      <div className="mb-4 flex items-center gap-4">
+        <span className="h-px flex-1 bg-neutral-200" aria-hidden />
+        <h3 className="text-sm sm:text-base font-bold tracking-[0.25em] text-neutral-800">オプション</h3>
+        <span className="h-px flex-1 bg-neutral-200" aria-hidden />
+      </div>
+      <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+        {OPTIONS.map((item) => {
+          const Icon = item.icon;
+          return (
             <div
               key={item.name}
-              className="bg-white rounded-2xl p-6 shadow-soft border border-neutral-100 min-w-0"
+              className="flex items-center gap-3 rounded-2xl border border-[#d7e4ff] bg-white px-4 py-3.5 shadow-soft"
             >
-              <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 mb-2">
-                <p className="text-neutral-900 font-semibold text-sm sm:text-base">{item.name}</p>
-                {item.price && (
-                  <p className="text-abody-teal font-bold text-base sm:text-lg shrink-0">
-                    {item.price}
-                    {item.unit && <span className="font-medium text-neutral-600 ml-1">{item.unit}</span>}
-                  </p>
-                )}
+              <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-[#eef4ff] text-[#2457e6]">
+                <Icon className="h-5 w-5" aria-hidden />
               </div>
-              {item.description && <p className="text-neutral-600 text-xs sm:text-sm leading-relaxed">{item.description}</p>}
+              <div className="min-w-0 flex-1">
+                <p className="text-sm font-bold text-neutral-900">{item.name}</p>
+                <p className="text-xs text-neutral-500">{item.description}</p>
+              </div>
+              <p className="shrink-0 text-right font-black leading-tight text-[#2457e6] tabular-nums">
+                <span className="text-lg sm:text-xl">{item.price}</span>
+                <span className="text-sm">円</span>
+                <span className="block text-[10px] font-bold text-neutral-400">（税込）</span>
+              </p>
             </div>
-          ))}
-        </div>
+          );
+        })}
       </div>
-    </section>
+    </div>
   );
 }
