@@ -3,7 +3,7 @@ import { CtaButton } from "@/components/lp/CtaButton";
 
 export function LPHero() {
   return (
-    <section className="relative bg-white">
+    <section id="hero" className="relative bg-white">
       <h1 className="sr-only">ピラティスも、パーソナルも。通い放題で、理想の体へ。</h1>
       <div className="relative">
         <Image
@@ -24,16 +24,14 @@ export function LPHero() {
           priority
           sizes="100vw"
         />
-        <div className="hidden sm:flex absolute inset-x-0 bottom-8 justify-center px-4">
-          <CtaButton href="#campaign" className="px-10 py-3.5 text-base shadow-soft">
+        <div className="absolute inset-x-0 bottom-5 sm:bottom-8 flex justify-center px-4 z-10">
+          <CtaButton
+            href="#campaign"
+            className="px-8 sm:px-10 py-3 sm:py-3.5 text-sm sm:text-base shadow-soft"
+          >
             まずは無料体験へ
           </CtaButton>
         </div>
-      </div>
-      <div className="sm:hidden flex justify-center px-4 pt-4 pb-2">
-        <CtaButton href="#campaign" className="w-full max-w-xs py-3.5 text-base shadow-soft">
-          まずは無料体験へ
-        </CtaButton>
       </div>
     </section>
   );
